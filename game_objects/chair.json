@@ -1,0 +1,7 @@
+{
+	"type" : "unit",
+	"on_char_collision" : {
+		"animate_char" : "sit"
+	},
+	"can_rotate" : true
+}

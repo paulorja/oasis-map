@@ -1,0 +1,10 @@
+{
+  "terrain" : "grass",
+  "player" : { "sprite" : "test" },
+  "cell_object" : {
+    "object_name" : "shower-simple",
+    "sprite_top" : "shower_top",
+    "sprite_bottom" : "shower_bottom",
+    "solid" : false
+  } 
+}
