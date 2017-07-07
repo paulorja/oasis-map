@@ -34,14 +34,14 @@ class World
     end
   end
 
-  def move_character(character, x, y)
-
-  end
-
-  def gameplay(json_msg, player) 
-    case json_msg["gameplay_name"]
-    when "move"
-      puts "move"
+  def gameplay(json_msg, player, server)
+    case json_msg['gameplay_name']
+    when 'move'
+      Gameplay::MoveCharacter.new(json_msg['gameplay_name'], json_msg['params'], server, player, self).run
+    when 'global_chat'
+      Gameplay::GlobalChat.new(json_msg['gameplay_name'], json_msg['params'], server, player, self).run
+    else
+      raise 'fuck'
     end
   end
 
@@ -62,6 +62,11 @@ class World
       rx += 1;
     end
     client_world_part
+  end
+
+  def get_cell(x, y)
+    return @world[x][y] if x and y and @world[x] and @world[x][y] and @world[x][y].is_a? Cell
+    nil
   end
 
 end

@@ -28,4 +28,12 @@ class ClientMessages
     })
   end
 
+  def self.global_chat(config)
+    JsonMsg.success({
+      message: 'global_chat',
+      nickname: config[:nickname],
+      chat_message: config[:chat_message]
+    })
+  end
+
 end

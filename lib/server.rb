@@ -1,6 +1,5 @@
 require 'em-websocket'
 require 'json'
-require 'pg'
 require 'colorize'
 
 require './lib/json_msg'
@@ -10,7 +9,9 @@ require './lib/world'
 require './lib/cell'
 require './lib/player'
 require './lib/character'
-require './lib/gameplay_cmd'
+require './lib/gameplay/gameplay_cmd'
+require './lib/gameplay/move_character'
+require './lib/gameplay/global_chat'
 
 class Server
 
@@ -36,10 +37,10 @@ class Server
           begin
             json_msg = JSON.parse(msg)
           rescue
-            puts "invalid json: #{msg}".red
+            Log.alert "invalid json: #{msg}".red
           end
 
-          Log.log "Received: #{msg}";
+          Log.log "Received: #{msg}"
 
           case json_msg['message']
           when 'auth'
@@ -59,7 +60,7 @@ class Server
             if @players[ws.object_id].nil?
               puts 'you cant do this'
             else
-              @world.gameplay json_msg, @players[ws.object_id]
+              @world.gameplay json_msg, @players[ws.object_id], self
             end
           else
             puts 'not found'
@@ -70,6 +71,7 @@ class Server
 	  }
     
       ws.onclose {
+        # remove player from world
         if @players[ws.object_id]
           player_cell = @players[ws.object_id].character.cell
           player_cell.character = nil
