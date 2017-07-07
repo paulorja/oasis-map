@@ -21,17 +21,8 @@ class World
   end
 
   def add_character(character)
-    char_cell = start_character_cell
-    char_cell.character = character
-    char_cell.character.cell = char_cell
-  end
-
-  def start_character_cell
-    for y in 0..(@height - 1) do
-      for x in 0..(@width - 1) do
-        return @world[x][y] if @world[x][y].terrain == 'grass' and @world[x][y].character == nil
-      end
-    end
+    char_cell = get_cell(0, 0)
+    character.cell = char_cell
   end
 
   def gameplay(json_msg, player, server)

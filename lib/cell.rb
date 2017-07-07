@@ -1,9 +1,8 @@
 class Cell
   
-  attr_accessor :character, :terrain, :unit
+  attr_accessor :terrain, :unit, :x, :y
 
   def initialize(terrain, x, y)
-    @character = nil
     @terrain = terrain
     @unit = nil
     @x = x
@@ -14,7 +13,6 @@ class Cell
   	{
   		terrain: @terrain,
   		unit: @unit,
-  		character: (@character == nil ? nil : @character.client_data),
       x: @x,
       y: @y
   	}

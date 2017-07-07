@@ -47,11 +47,12 @@ class Server
             if @players[ws.object_id].nil?
               player = Player.new(json_msg['nickname'])
               @players[ws.object_id] = player
-              @world.add_character player.character
-              channel_push('all', ClientMessages.refresh_cell(player.character.cell))
               subscribe_channel('all', ws)
               send ClientMessages.auth_success, ws
               send ClientMessages.init_world(@world.height, @world.width, @world.part_of_world(0, 0, 10)), ws
+              send ClientMessages.all_characters(@players), ws
+              @world.add_character player.character
+              channel_push('all', ClientMessages.add_character(player.character))
               puts "#{player.character.nickname} join"
             else
               puts 'you already auth'
@@ -73,11 +74,9 @@ class Server
       ws.onclose {
         # remove player from world
         if @players[ws.object_id]
-          player_cell = @players[ws.object_id].character.cell
-          player_cell.character = nil
-          @players[ws.object_id].character = nil
+          character = @players[ws.object_id].character
+          channel_push('all', ClientMessages.remove_character(character))
           @players.delete ws.object_id
-          channel_push('all', ClientMessages.refresh_cell(player_cell))
         end
         Log.log 'Connection Close'
       }
