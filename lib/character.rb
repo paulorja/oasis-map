@@ -9,7 +9,7 @@ class Character
     @end_move_at = Time.now.to_f
     @pathfinding = nil
     # tempo para atravessar um quadrado em linha reta
-    @speed = 1
+    @speed = 0.6
   end
 
   def client_data

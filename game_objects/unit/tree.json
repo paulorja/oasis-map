@@ -1,5 +1,5 @@
 {
-	"type" : "unit",
+	"sprite" : "tree",
 	"pegavel" : true,
 	"coletor" : "coletor_de_arvore"
 }

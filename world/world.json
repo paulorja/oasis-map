@@ -1,5 +1,6 @@
 [
 	[
+		{"terrain" : { "sprite" : "grass" }, "unit" : { "sprite" : "tree" }},
 		{"terrain" : "grass"},
 		{"terrain" : "water"},
 		{"terrain" : "grass"},
@@ -25,14 +26,20 @@
 	],
 	[
 		{"terrain" : "grass"},
-		{"terrain" : "grass"},
+		{"terrain" : "grass", "unit" : "tree"},
 		{"terrain" : "water"},
 		{"terrain" : "grass"}
 	],
 	[
+		{"terrain" : "grass", "unit" : "tree2"},
 		{"terrain" : "grass"},
 		{"terrain" : "grass"},
+		{"terrain" : "grass", "unit" : "tree"}
+	],
+	[
+		{"terrain" : "grass", "unit" : "tree3"},
 		{"terrain" : "grass"},
-		{"terrain" : "grass"}
+		{"terrain" : "grass"},
+		{"terrain" : "grass", "unit" : "stone"}
 	]
 ]

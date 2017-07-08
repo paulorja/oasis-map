@@ -14,7 +14,11 @@ class World
     for x in 0..(@height - 1) do
       row = []
       for y in 0..(@width - 1) do
-        row << Cell.new(@world_file_hash[x][y]["terrain"], x, y)
+        row << Cell.new(
+            @world_file_hash[x][y]['terrain'],
+            @world_file_hash[x][y]['unit'],
+            x,
+            y)
       end
       @world << row
     end

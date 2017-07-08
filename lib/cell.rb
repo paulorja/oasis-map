@@ -2,9 +2,9 @@ class Cell
   
   attr_accessor :terrain, :unit, :x, :y
 
-  def initialize(terrain, x, y)
+  def initialize(terrain, unit, x, y)
     @terrain = terrain
-    @unit = nil
+    @unit = unit
     @x = x
     @y = y
   end

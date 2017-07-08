@@ -10,7 +10,7 @@ module Gameplay
         # pathfinding
         for x in 0..(world.height - 1) do
           for y in 0..(world.width - 1) do
-            if world.get_cell(x, y).terrain == 'water'
+            if world.get_cell(x, y).terrain == 'water' or world.get_cell(x, y).unit != nil
               blocked_cells.add([x, y])
             end
           end
