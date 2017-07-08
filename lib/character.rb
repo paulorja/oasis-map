@@ -9,7 +9,7 @@ class Character
     @end_move_at = Time.now.to_f
     @pathfinding = nil
     # tempo para atravessar um quadrado em linha reta
-    @speed = 0.4
+    @speed = 1
   end
 
   def client_data
@@ -40,19 +40,26 @@ class Character
     @pathfinding = pathfinding
   end
 
-  def current_cell
-    last_cell = nil
-    quantidade_percorrida = Time.now.to_f
-    @pathfinding.each do |cell|
-      if last_cell
-        if last_cell[0] != cell[0] and last_cell[1] != cell[1]
-          quantidade_percorrida += Math.sqrt(2*@speed)
-        else
-          quantidade_percorrida += @speed
+  def current_pos
+    if diff_move > 0
+      last_cell = nil
+      time = @start_move_at
+      @pathfinding.each_with_index do |cell, index|
+        if last_cell
+          if last_cell[0] != cell[0] and last_cell[1] != cell[1]
+            time += Math.sqrt(2) * @speed
+          else
+            time += @speed
+          end
+          if time > Time.now.to_f
+            break
+          end
         end
-        return cell if quantidade_percorrida > diff_move
+        last_cell = cell
       end
-      last_cell = cell
+      last_cell
+    else
+      @cell
     end
   end
 

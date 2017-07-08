@@ -17,7 +17,16 @@ module Gameplay
         end
 
         map = PathfindingGenerator.new(blocked_cells, world.height, world.width)
-        pathfinding = map.find_path(cell_from.x, cell_from.y, cell_to.x, cell_to.y)
+        pos_from = player.character.current_pos
+        if pos_from.is_a? Array
+          from_x = pos_from[0]
+          from_y = pos_from[1]
+        else
+          from_x = pos_from.x
+          from_y = pos_from.y
+        end
+        pathfinding = map.find_path(from_x, from_y, cell_to.x, cell_to.y)
+
         if pathfinding
           player.character.set_pathfinding pathfinding
           player.character.cell = cell_to
