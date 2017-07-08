@@ -1,6 +1,7 @@
 require 'em-websocket'
 require 'json'
 require 'colorize'
+require 'chingu_pathfinding'
 
 require './lib/json_msg'
 require './lib/client_messages'
@@ -12,6 +13,7 @@ require './lib/character'
 require './lib/gameplay/gameplay_cmd'
 require './lib/gameplay/move_character'
 require './lib/gameplay/global_chat'
+require './lib/pathfinding_generator'
 
 class Server
 

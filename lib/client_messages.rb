@@ -23,28 +23,15 @@ class ClientMessages
   end
 
   def self.add_character(character)
-    JsonMsg.success({
-      message: 'add_character',
-      nickname: character.nickname,
-      x: character.cell.x,
-      y: character.cell.y
-    })
+    JsonMsg.success({message: 'add_character', character: character.client_data })
   end
 
   def self.remove_character(character)
-    JsonMsg.success({
-      message: 'remove_character',
-      nickname: character.nickname
-    })
+    JsonMsg.success({message: 'remove_character', nickname: character.nickname })
   end
 
   def self.move_character(character)
-    JsonMsg.success({
-      message: 'move_character',
-      nickname: character.nickname,
-      to_x: character.cell.x,
-      to_y: character.cell.y
-    })
+    JsonMsg.success({message: 'move_character', character: character.client_data })
   end
 
   def self.auth_success

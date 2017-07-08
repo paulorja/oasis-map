@@ -6,3 +6,5 @@ gem "colorize"
 gem "em-websocket"
 gem "json"
 gem "rspec"
+
+gem 'chingu-pathfinding'

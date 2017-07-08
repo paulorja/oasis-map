@@ -7,7 +7,7 @@
 	],
 	[
 		{"terrain" : "grass"},
-		{"terrain" : "grass"},
+		{"terrain" : "water"},
 		{"terrain" : "water"},
 		{"terrain" : "water"}
 	],
@@ -21,12 +21,18 @@
 		{"terrain" : "grass"},
 		{"terrain" : "grass"},
 		{"terrain" : "grass"},
-		{"terrain" : "water"}
+		{"terrain" : "grass"}
 	],
 	[
+		{"terrain" : "grass"},
+		{"terrain" : "grass"},
 		{"terrain" : "water"},
-		{"terrain" : "water"},
-		{"terrain" : "water"},
-		{"terrain" : "water"}
+		{"terrain" : "grass"}
+	],
+	[
+		{"terrain" : "grass"},
+		{"terrain" : "grass"},
+		{"terrain" : "grass"},
+		{"terrain" : "grass"}
 	]
 ]
