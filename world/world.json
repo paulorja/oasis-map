@@ -1,6 +1,5 @@
 [
 	[
-		{"terrain" : { "sprite" : "grass" }, "unit" : { "sprite" : "tree" }},
 		{"terrain" : "grass"},
 		{"terrain" : "water"},
 		{"terrain" : "grass"},
