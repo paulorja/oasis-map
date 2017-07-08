@@ -2,6 +2,7 @@ require 'em-websocket'
 require 'json'
 require 'colorize'
 require 'chingu_pathfinding'
+require 'set'
 
 require './lib/json_msg'
 require './lib/client_messages'
