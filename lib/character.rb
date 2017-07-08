@@ -9,7 +9,7 @@ class Character
     @end_move_at = Time.now.to_f
     @pathfinding = nil
     # tempo para atravessar um quadrado em linha reta
-    @speed = 1
+    @speed = 0.4
   end
 
   def client_data
@@ -17,7 +17,8 @@ class Character
   		nickname: nickname,
       pathfinding: @pathfinding,
       time_to_move: diff_move,
-      cell: cell.client_data
+      cell: cell.client_data,
+      speed: @speed
   	}
   end
 
@@ -29,7 +30,7 @@ class Character
       if last_cell
         # se x e y são diferentes, então acrescenta diagonal
         if last_cell[0] != cell[0] and last_cell[1] != cell[1]
-          @end_move_at += Math.sqrt(2*@speed)
+          @end_move_at += Math.sqrt(2) * @speed
         else
           @end_move_at += @speed
         end
