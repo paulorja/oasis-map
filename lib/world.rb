@@ -3,29 +3,13 @@ class World
   attr_reader :width, :height
 
   def initialize
-    @world = []
-    @world_file_hash = JSON.parse(File.read('./world/world.json'))
-    @height =  @world_file_hash.size
-    @width = @world_file_hash[0].size
-    init_world
-  end
-
-  def init_world
-    for x in 0..(@height - 1) do
-      row = []
-      for y in 0..(@width - 1) do
-        row << Cell.new(
-            @world_file_hash[x][y]['terrain'],
-            @world_file_hash[x][y]['unit'],
-            x,
-            y)
-      end
-      @world << row
-    end
+    @world = WorldCreator.create
+    @height = @world.size
+    @width = @world[0].size
   end
 
   def add_character(character)
-    char_cell = get_cell(0, 0)
+    char_cell = get_cell(2, 1)
     character.cell = char_cell
   end
 
@@ -41,9 +25,9 @@ class World
   end
 
   def part_of_world(x, y, range)
+    range+= 50
     client_world_part = []
     rx = x
-    ry = y
     range.times do
       ry = y
       range.times do

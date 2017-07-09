@@ -34,8 +34,8 @@ class ClientMessages
     JsonMsg.success({message: 'move_character', character: character.client_data })
   end
 
-  def self.auth_success
-  	JsonMsg.success({message: 'auth_success'})
+  def self.auth_success(nickname)
+  	JsonMsg.success({message: 'auth_success', nickname: nickname})
   end
 
   def self.init_world(height, width, part_of_world)

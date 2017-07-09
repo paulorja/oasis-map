@@ -11,11 +11,15 @@ class Cell
 
   def client_data 
   	{
-  		terrain: @terrain,
-  		unit: @unit,
+  		terrain: @terrain['public'],
+  		unit: @unit != nil ? @unit['public'] : nil,
       x: @x,
       y: @y
   	}
+  end
+
+  def is_solid?
+    terrain['public']['solid'] or (unit and unit['public']['solid'])
   end
 
 end

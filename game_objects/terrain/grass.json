@@ -1,3 +1,9 @@
 {
-	"sprite" : "grass"
+	"public" : {
+		"sprite" : "grass",
+		"solid" : false
+	},
+	"private" : {
+		"tsx_id" : 0
+	}
 }

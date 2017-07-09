@@ -1,5 +1,9 @@
 {
-	"sprite" : "tree",
-	"pegavel" : true,
-	"coletor" : "coletor_de_arvore"
+	"public" : {
+		"sprite" : "tree",
+		"solid" : true
+	},
+	"private" : {
+		"tsx_id" : 2
+	}
 }

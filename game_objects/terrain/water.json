@@ -1,4 +1,9 @@
 {
-	"sprite" : "grass",
-	"solid" : true
+	"public" : {
+		"sprite" : "water",
+		"solid" : true
+	},
+	"private" : {
+		"tsx_id" : 1
+	}
 }

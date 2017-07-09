@@ -14,6 +14,9 @@ require './lib/character'
 require './lib/gameplay/gameplay_cmd'
 require './lib/gameplay/move_character'
 require './lib/gameplay/global_chat'
+require './lib/game_object_loader'
+require './lib/world_loader'
+require './lib/world_creator'
 require './lib/pathfinding_generator'
 
 class Server
@@ -51,7 +54,7 @@ class Server
               player = Player.new(json_msg['nickname'])
               @players[ws.object_id] = player
               subscribe_channel('all', ws)
-              send ClientMessages.auth_success, ws
+              send ClientMessages.auth_success(player.character.nickname), ws
               send ClientMessages.init_world(@world.height, @world.width, @world.part_of_world(0, 0, 10)), ws
               send ClientMessages.all_characters(@players), ws
               @world.add_character player.character
