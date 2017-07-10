@@ -22,4 +22,8 @@ class Cell
     terrain['public']['solid'] or (unit and unit['public']['solid'])
   end
 
+  def distance_to(cell_to)
+    Math.sqrt(((cell_to.x-x)**2) + ((cell_to.y-y)**2))
+  end
+
 end

@@ -83,7 +83,7 @@ class Server
   end
 
   def send(msg, ws)
-    Log.send(msg)
+    Log.send(msg[0, 1000])
     ws.send msg
   end
 

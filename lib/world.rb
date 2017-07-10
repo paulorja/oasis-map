@@ -9,7 +9,7 @@ class World
   end
 
   def add_character(character)
-    char_cell = get_cell(2, 1)
+    char_cell = get_cell(63, 65)
     character.cell = char_cell
   end
 
@@ -25,7 +25,7 @@ class World
   end
 
   def part_of_world(x, y, range)
-    range+= 50
+    range+= 500
     client_world_part = []
     rx = x
     range.times do
