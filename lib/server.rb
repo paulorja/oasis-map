@@ -18,6 +18,7 @@ require './lib/game_object_loader'
 require './lib/world_loader'
 require './lib/world_creator'
 require './lib/pathfinding_generator'
+require './lib/authentication'
 
 class Server
 
@@ -51,15 +52,7 @@ class Server
           case json_msg['message']
           when 'auth'
             if @players[ws.object_id].nil?
-              player = Player.new(json_msg['nickname'])
-              @players[ws.object_id] = player
-              subscribe_channel('all', ws)
-              send ClientMessages.auth_success(player.character.nickname), ws
-              send ClientMessages.init_world(@world.height, @world.width, @world.part_of_world(0, 0, 10)), ws
-              send ClientMessages.all_characters(@players), ws
-              @world.add_character player.character
-              channel_push('all', ClientMessages.add_character(player.character))
-              puts "#{player.character.nickname} join"
+              Authentication.auth(json_msg, self, ws, @world, @players)
             else
               puts 'you already auth'
             end

@@ -1,15 +1,15 @@
 class Character
 
-  attr_accessor :nickname, :cell
+  attr_accessor :nickname, :cell, :body
 
-  def initialize(nickname)
+  def initialize(nickname, body)
     @nickname = nickname
     @cell = nil
     @start_move_at = Time.now.to_f
     @end_move_at = Time.now.to_f
     @pathfinding = nil
-    # tempo para atravessar um quadrado em linha reta
     @speed = 0.6
+    @body = body
   end
 
   def client_data
@@ -18,7 +18,8 @@ class Character
       pathfinding: @pathfinding,
       time_to_move: diff_move,
       cell: cell.client_data,
-      speed: @speed
+      speed: @speed,
+      body: @body
   	}
   end
 
@@ -70,6 +71,10 @@ class Character
     else
       0
     end
+  end
+
+  def valid_body
+    %w(1 2 3 4 5 6).include? @body
   end
 
 end

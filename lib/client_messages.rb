@@ -12,11 +12,7 @@ class ClientMessages
     characters_array = []
     players.each do |player|
       if player[1].character and player[1].character.cell
-        characters_array << {
-          nickname: player[1].character.nickname,
-          x: player[1].character.cell.x,
-          y: player[1].character.cell.y
-        }
+        characters_array << player[1].character.client_data
       end
     end
     JsonMsg.success({message: 'all_characters', characters: characters_array})
