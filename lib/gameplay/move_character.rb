@@ -4,7 +4,7 @@ module Gameplay
     def run
       cell_to = world.get_cell(params['to_x'], params['to_y'])
       cell_from = player.character.cell
-      if cell_from and cell_to and cell_to.terrain['public']['sprite'] == 'grass'
+      if cell_from and cell_to and !cell_to.is_solid?
         blocked_cells = Set.new
 
         # pathfinding

@@ -19,7 +19,9 @@ class Character
       time_to_move: diff_move,
       cell: cell.client_data,
       speed: @speed,
-      body: @body
+      body: @body,
+      x: @cell.x,
+      y: @cell.y,
   	}
   end
 
