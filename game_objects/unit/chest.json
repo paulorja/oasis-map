@@ -1,0 +1,9 @@
+{
+  "public" : {
+    "sprite" : "chest",
+    "solid" : true
+  },
+  "private" : {
+    "tsx_id" : 4
+  }
+}
