@@ -1,11 +1,12 @@
 class World
 
-  attr_reader :width, :height
+  attr_reader :width, :height, :items
 
   def initialize
     @world = WorldCreator.create
     @height = @world.size
     @width = @world[0].size
+    @items = GameObjectLoader.load_items
   end
 
   def add_character(character)
@@ -13,12 +14,16 @@ class World
     character.cell = char_cell
   end
 
-  def gameplay(json_msg, player, server)
+  def gameplay(json_msg, player, server, ws)
     case json_msg['gameplay_name']
     when 'move'
-      Gameplay::MoveCharacter.new(json_msg['gameplay_name'], json_msg['params'], server, player, self).run
+      Gameplay::MoveCharacter.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'global_chat'
-      Gameplay::GlobalChat.new(json_msg['gameplay_name'], json_msg['params'], server, player, self).run
+      Gameplay::GlobalChat.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'use_item'
+      Gameplay::UseItem.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'remove_equip'
+      Gameplay::RemoveEquip.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     else
       raise 'fuck'
     end

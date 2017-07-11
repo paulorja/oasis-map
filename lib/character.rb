@@ -1,15 +1,21 @@
 class Character
 
-  attr_accessor :nickname, :cell, :body
+  attr_accessor :nickname, :cell, :inventory
 
-  def initialize(nickname, body)
+  def initialize(nickname, body_style)
     @nickname = nickname
     @cell = nil
     @start_move_at = Time.now.to_f
     @end_move_at = Time.now.to_f
     @pathfinding = nil
     @speed = 0.6
-    @body = body
+    @body_style = body_style
+    # equip
+    @right_hand = nil
+    @body = nil
+    @head = nil
+    #
+    @inventory = Inventory.new
   end
 
   def client_data
@@ -19,9 +25,12 @@ class Character
       time_to_move: diff_move,
       cell: cell.client_data,
       speed: @speed,
-      body: @body,
+      body_style: @body_style,
       x: @cell.x,
       y: @cell.y,
+      head: @head == nil ? nil : @head['public'],
+      body: @body == nil ? nil : @body['public'],
+      right_hand: @right_hand == nil ? nil : @right_hand['public']
   	}
   end
 
@@ -75,8 +84,50 @@ class Character
     end
   end
 
-  def valid_body
-    %w(1 2 3 4 5 6).include? @body
+  def valid_body_style
+    %w(1 2 3 4 5 6).include? @body_style
+  end
+
+  def equip(item)
+    if item['public']['equip_on']
+      case item['public']['equip_on']
+      when 'right_hand'
+        inventory.add @right_hand unless @right_hand.nil?
+        @right_hand = item
+      when 'head'
+        inventory.add @head unless @head.nil?
+        @head = item
+      when 'body'
+        inventory.add @body unless @body.nil?
+        @body = item
+      else
+        false
+      end
+      true
+    end
+  end
+
+  def remove_equip(item)
+    if @right_hand and @right_hand['public']['id'] == item['public']['id']
+      @right_hand = nil
+      return true
+    end
+    if @body and @body['public']['id'] == item['public']['id']
+      @body = nil
+      return true
+    end
+    if @head and @head['public']['id'] == item['public']['id']
+      @head = nil
+      return true
+    end
+    false
+  end
+
+  def find_equip(item_id)
+    return @right_hand if @right_hand and @right_hand['public']['id'] == item_id
+    return @body if @body and @body['public']['id'] == item_id
+    return @head if @head and @head['public']['id'] == item_id
+    false
   end
 
 end

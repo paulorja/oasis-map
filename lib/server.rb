@@ -14,11 +14,14 @@ require './lib/character'
 require './lib/gameplay/gameplay_cmd'
 require './lib/gameplay/move_character'
 require './lib/gameplay/global_chat'
+require './lib/gameplay/use_item'
+require './lib/gameplay/remove_equip'
 require './lib/game_object_loader'
 require './lib/world_loader'
 require './lib/world_creator'
 require './lib/pathfinding_generator'
 require './lib/authentication'
+require './lib/inventory'
 
 class Server
 
@@ -60,7 +63,7 @@ class Server
             if @players[ws.object_id].nil?
               puts 'you cant do this'
             else
-              @world.gameplay json_msg, @players[ws.object_id], self
+              @world.gameplay json_msg, @players[ws.object_id], self, ws
             end
           else
             puts 'not found'

@@ -2,21 +2,12 @@ class Player
 
   attr_accessor :character
 
-  def initialize(nickname, body)
-    @character = Character.new(nickname, body)
+  def initialize(nickname, body_style)
+    @character = Character.new(nickname, body_style)
   end
   
-  def play(gameplay_cmd)
-    case gameplay_cmd.type
-    when "move"
-    when "chat"
-    else
-      return nil
-    end
-  end
-
   def is_valid?
-    true if @character.valid_body
+    true if @character.valid_body_style
   end
   
 end

@@ -1,11 +1,18 @@
 class Authentication
 
   def self.auth(json_msg, server, ws, world, players)
-    player = Player.new(json_msg['nickname'], json_msg['body'])
+    player = Player.new(json_msg['nickname'], json_msg['body_style'])
     if player.is_valid?
       players[ws.object_id] = player
       server.subscribe_channel('all', ws)
       server.send ClientMessages.auth_success(player.character.nickname), ws
+
+      player.character.inventory.add world.items[1]
+      player.character.inventory.add world.items[3]
+      player.character.inventory.add world.items[4]
+      player.character.inventory.add world.items[5]
+
+      server.send ClientMessages.inventory(player.character.inventory), ws
       server.send ClientMessages.init_world(world.height, world.width, world.part_of_world(0, 0, 10)), ws
       server.send ClientMessages.all_characters(players), ws
       world.add_character player.character

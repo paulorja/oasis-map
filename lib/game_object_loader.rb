@@ -8,6 +8,20 @@ class GameObjectLoader
     tsx_loader 'unit'
   end
 
+  def self.load_items
+    items = {}
+    Dir.glob("./game_objects/item/*.json") do |item_file|
+      item_json = JSON.parse(File.read(item_file))
+      if items[item_json['public']['id']].nil?
+        items[item_json['public']['id']] = item_json
+      else
+        Log.alert "ID ALREADY USED file => #{item_file} json =: #{item_json.inspect}"
+        exit
+      end
+    end
+    items
+  end
+
   def self.tsx_loader(dir)
     objects = {}
     Dir.glob("./game_objects/#{dir}/*.json") do |objects_file|

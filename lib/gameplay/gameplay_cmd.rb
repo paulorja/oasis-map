@@ -1,14 +1,15 @@
 module Gameplay
   class GameplayCmd
 
-    attr_accessor :type, :params, :server, :player, :world
+    attr_accessor :type, :params, :server, :player, :world, :ws
 
-    def initialize(type, params, server, player, world)
+    def initialize(type, params, server, player, world, ws)
       @type = type
       @params = params
       @server = server
       @player = player
       @world = world
+      @ws = ws
     end
 
     def is_valid?
