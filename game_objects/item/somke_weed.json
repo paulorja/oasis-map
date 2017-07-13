@@ -1,0 +1,11 @@
+{
+  "public" : {
+    "type" : "item",
+    "equip_on" : "face",
+    "sprite" : "smoke_weed",
+    "id" : 17
+  },
+  "private" : {
+
+  }
+}
