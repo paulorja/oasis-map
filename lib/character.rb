@@ -14,6 +14,7 @@ class Character
     @right_hand = nil
     @body = nil
     @head = nil
+    @face = nil
     #
     @inventory = Inventory.new
   end
@@ -30,7 +31,8 @@ class Character
       y: @cell.y,
       head: @head == nil ? nil : @head['public'],
       body: @body == nil ? nil : @body['public'],
-      right_hand: @right_hand == nil ? nil : @right_hand['public']
+      right_hand: @right_hand == nil ? nil : @right_hand['public'],
+      face: @face == nil ? nil : @face['public']
   	}
   end
 
@@ -100,6 +102,9 @@ class Character
       when 'body'
         inventory.add @body unless @body.nil?
         @body = item
+      when 'face'
+        inventory.add @face unless @face.nil?
+        @face = item
       else
         false
       end
@@ -120,6 +125,10 @@ class Character
       @head = nil
       return true
     end
+    if @face and @face['public']['id'] == item['public']['id']
+      @face = nil
+      return true
+    end
     false
   end
 
@@ -127,6 +136,7 @@ class Character
     return @right_hand if @right_hand and @right_hand['public']['id'] == item_id
     return @body if @body and @body['public']['id'] == item_id
     return @head if @head and @head['public']['id'] == item_id
+    return @face if @face and @face['public']['id'] == item_id
     false
   end
 

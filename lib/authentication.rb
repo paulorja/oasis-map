@@ -11,6 +11,11 @@ class Authentication
       player.character.inventory.add world.items[3]
       player.character.inventory.add world.items[4]
       player.character.inventory.add world.items[5]
+      player.character.inventory.add world.items[7]
+      player.character.inventory.add world.items[8]
+      player.character.inventory.add world.items[9]
+      player.character.inventory.add world.items[10]
+      player.character.inventory.add world.items[11]
 
       server.send ClientMessages.inventory(player.character.inventory), ws
       server.send ClientMessages.init_world(world.height, world.width, world.part_of_world(0, 0, 10)), ws

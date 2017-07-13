@@ -1,0 +1,11 @@
+{
+  "public" : {
+    "type" : "item",
+    "equip_on" : "face",
+    "sprite" : "make_up_sexy",
+    "id" : 11
+  },
+  "private" : {
+
+  }
+}

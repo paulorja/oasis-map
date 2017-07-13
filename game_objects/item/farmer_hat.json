@@ -1,0 +1,11 @@
+{
+  "public" : {
+    "type" : "item",
+    "equip_on" : "head",
+    "sprite" : "farmer_hat",
+    "id" : 8
+  },
+  "private" : {
+
+  }
+}
