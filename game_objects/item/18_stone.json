@@ -1,0 +1,10 @@
+{
+  "public" : {
+    "type": "item",
+    "sprite": "stone",
+    "id": 18
+  },
+  "private" : {
+
+  }
+}

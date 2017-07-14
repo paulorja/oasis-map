@@ -1,12 +1,13 @@
 class Character
 
-  attr_accessor :nickname, :cell, :inventory
+  attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown
 
   def initialize(nickname, body_style)
     @nickname = nickname
     @cell = nil
     @start_move_at = Time.now.to_f
     @end_move_at = Time.now.to_f
+    @cooldown = Time.now.to_f
     @pathfinding = nil
     @speed = 0.6
     @body_style = body_style
@@ -73,7 +74,7 @@ class Character
       end
       last_cell
     else
-      @cell
+      [@cell.x, @cell.y]
     end
   end
 
@@ -140,4 +141,21 @@ class Character
     false
   end
 
+  def is_action_collision?(x, y)
+    pos = current_pos
+    if (x == pos[0]) ^ (y == pos[1])
+      return true if pos[0] == x and pos[1] +1 == y
+      return true if pos[0] == x and pos[1] -1 == y
+      return true if pos[1] == y and pos[0] +1 == x
+      return true if pos[1] == y and pos[0] -1 == x
+    end
+  end
+
+  def is_cooldown_ok
+    Time.now.to_f > @cooldown
+  end
+
+  def is_moving
+    @end_move_at > Time.now.to_f
+  end
 end

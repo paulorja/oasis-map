@@ -19,6 +19,10 @@ class World
     case json_msg['gameplay_name']
     when 'move'
       Gameplay::MoveCharacter.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'cell_action'
+      Gameplay::CellAction.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'take_cell_drops'
+      Gameplay::TakeCellDrops.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'global_chat'
       Gameplay::GlobalChat.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'use_item'
@@ -53,6 +57,9 @@ class World
     get_world.map{|row| row.map{|cell| cell.client_data}}
   end
 
+  def refresh_pathfinding
+    @pathfinding = PathfindingGenerator.new(@world, @height, @width)
+  end
 
   def get_cell(x, y)
     return @world[x][y] if x and y and @world[x] and @world[x][y] and @world[x][y].is_a? Cell
