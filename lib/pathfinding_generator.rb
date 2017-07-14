@@ -1,12 +1,12 @@
 class PathfindingGenerator < Pathfinding
 
-  def initialize(blocked_cells,  height, width)
-    @blocked_cells = blocked_cells
+  def initialize(world, height, width)
+    @world = world
     super(height, width, 1)
   end
 
   def blocked?(x,y)
-    true if @blocked_cells.include? [x, y]
+    @world[x][y].is_solid?
   end
 
 end

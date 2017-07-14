@@ -1,12 +1,13 @@
 class World
 
-  attr_reader :width, :height, :items
+  attr_reader :width, :height, :items, :pathfinding
 
   def initialize
     @world = WorldCreator.create
     @height = @world.size
     @width = @world[0].size
     @items = GameObjectLoader.load_items
+    @pathfinding = PathfindingGenerator.new(@world, @height, @width)
   end
 
   def add_character(character)
@@ -47,6 +48,11 @@ class World
     end
     client_world_part
   end
+
+  def full_world_to_client
+    get_world.map{|row| row.map{|cell| cell.client_data}}
+  end
+
 
   def get_cell(x, y)
     return @world[x][y] if x and y and @world[x] and @world[x][y] and @world[x][y].is_a? Cell
