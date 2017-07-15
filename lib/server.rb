@@ -82,6 +82,9 @@ class Server
         # remove player from world
         if @players[ws.object_id]
           character = @players[ws.object_id].character
+          channel_push('all',
+            ClientMessages.global_chat(
+              {nickname: 'Server', chat_message: "#{character.nickname} saiu."}))
           channel_push('all', ClientMessages.remove_character(character))
           @players.delete ws.object_id
         end

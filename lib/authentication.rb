@@ -28,6 +28,9 @@ class Authentication
       server.send ClientMessages.all_characters(players), ws
       world.add_character player.character
       server.channel_push('all', ClientMessages.add_character(player.character))
+      server.channel_push('all',
+        ClientMessages.global_chat(
+          {nickname: 'Server', chat_message: "#{player.character.nickname} entrou."}))
       puts "#{player.character.nickname} join"
     end
   end
