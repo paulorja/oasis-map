@@ -17,6 +17,7 @@ module Gameplay
           if player.character.cell.unit.nil?
             player.character.cell.unit = world.units[item['private']['seed']['seed_unit_tsx_id']]
             player.character.inventory.remove_by_id item['public']['id']
+            world.add_event GameEvents::EventSeed.new(item['private']['seed']['time'], player.character.cell, world)
             server.send ClientMessages.inventory(player.character.inventory), ws
             server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
           end

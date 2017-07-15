@@ -1,6 +1,6 @@
 class World
 
-  attr_reader :width, :height, :items, :terrains, :units, :pathfinding
+  attr_reader :width, :height, :items, :terrains, :units, :pathfinding, :events
 
   def initialize
     @world = WorldCreator.create
@@ -10,6 +10,7 @@ class World
     @terrains = GameObjectLoader.load_terrains
     @units = GameObjectLoader.load_units
     @pathfinding = PathfindingGenerator.new(@world, @height, @width)
+    @events = []
   end
 
   def add_character(character)
@@ -33,6 +34,12 @@ class World
       Gameplay::RemoveEquip.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     else
       raise 'fuck'
+    end
+  end
+
+  def resolve_events(server)
+    @events.each do |event|
+      @events.delete event if event.resolve server
     end
   end
 
@@ -66,6 +73,12 @@ class World
   def get_cell(x, y)
     return @world[x][y] if x and y and @world[x] and @world[x][y] and @world[x][y].is_a? Cell
     nil
+  end
+
+  def add_event(event)
+    if event.is_a? GameEvents::GameEvent
+      @events << event
+    end
   end
 
 end

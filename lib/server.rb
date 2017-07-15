@@ -18,6 +18,8 @@ require './lib/gameplay/take_cell_drops'
 require './lib/gameplay/global_chat'
 require './lib/gameplay/use_item'
 require './lib/gameplay/remove_equip'
+require './lib/gameevent/gameevent'
+require './lib/gameevent/event_seed'
 require './lib/game_object_loader'
 require './lib/world_loader'
 require './lib/world_creator'
@@ -53,6 +55,7 @@ class Server
           end
 
           Log.log "Received: #{msg}"
+          @world.resolve_events self
 
           case json_msg['message']
           when 'auth'
