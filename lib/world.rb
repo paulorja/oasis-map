@@ -1,12 +1,14 @@
 class World
 
-  attr_reader :width, :height, :items, :pathfinding
+  attr_reader :width, :height, :items, :terrains, :units, :pathfinding
 
   def initialize
     @world = WorldCreator.create
     @height = @world.size
     @width = @world[0].size
     @items = GameObjectLoader.load_items
+    @terrains = GameObjectLoader.load_terrains
+    @units = GameObjectLoader.load_units
     @pathfinding = PathfindingGenerator.new(@world, @height, @width)
   end
 

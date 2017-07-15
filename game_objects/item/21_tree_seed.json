@@ -1,0 +1,14 @@
+{
+  "public" : {
+    "type" : "item",
+    "sprite" : "tree_seed",
+    "id" : 21
+  },
+  "private" : {
+    "seed" : {
+      "unit" : ["tree", "tree2", "tree3"],
+      "time" : 60,
+      "terrains" : ["grass"]
+    }
+  }
+}

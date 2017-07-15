@@ -1,7 +1,10 @@
 {
 	"public" : {
 		"sprite" : "tree3",
-		"solid" : true,
+		"solid" : true
+	},
+	"private" : {
+		"tsx_id" : 0,
 		"drops" : [
 			{
 				"item" : 19,
@@ -10,10 +13,11 @@
 			{
 				"item" : 19,
 				"percent" : 20
+			},
+			{
+				"item" : 21,
+				"percent" : 50
 			}
 		]
-	},
-	"private" : {
-		"tsx_id" : 0
 	}
 }

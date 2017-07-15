@@ -35,7 +35,7 @@ class Cell
   def get_unit_drops
     drops = []
     if unit
-      unit['public']['drops'].each do |drop|
+      unit['private']['drops'].each do |drop|
         drops << drop['item'] if rand(100) <= drop['percent']
       end
     end
