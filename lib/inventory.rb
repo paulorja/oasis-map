@@ -16,6 +16,15 @@ class Inventory
     @items.delete_at @items.index item
   end
 
+  def remove_by_id(id)
+    @items.each_with_index do |item, index|
+      if item['public']['id'] == id
+        @items.delete_at index
+        break
+      end
+    end
+  end
+
   def to_client
     @items.map { |i| i['public'] }
   end
