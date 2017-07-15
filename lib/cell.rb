@@ -25,7 +25,11 @@ class Cell
   end
 
   def is_solid?
-    terrain['public']['solid'] or (unit and unit['public']['solid'])
+    if terrain['public']['solid'] or (unit and unit['public']['solid'])
+      true
+    else
+      false
+    end
   end
 
   def distance_to(cell_to)

@@ -1,0 +1,10 @@
+{
+  "public" : {
+    "sprite" : "stone_wall",
+    "solid" : true
+  },
+  "private" : {
+    "tsx_id" : 7
+
+  }
+}

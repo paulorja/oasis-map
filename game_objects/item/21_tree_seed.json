@@ -6,8 +6,8 @@
   },
   "private" : {
     "seed" : {
-      "seed_unit_tsx_id" : 5,
-      "time" : 60,
+      "seed_unit_tsx_id" : 6,
+      "time" : 50,
       "terrains" : ["grass"]
     }
   }
