@@ -32,6 +32,8 @@ class World
       Gameplay::UseItem.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'remove_equip'
       Gameplay::RemoveEquip.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'char_action'
+      #todo
     else
       raise 'fuck'
     end

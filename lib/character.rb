@@ -143,6 +143,7 @@ class Character
 
   def is_action_collision?(x, y)
     pos = current_pos
+    return true if pos[0] == x and pos[1] == y
     if (x == pos[0]) ^ (y == pos[1])
       return true if pos[0] == x and pos[1] +1 == y
       return true if pos[0] == x and pos[1] -1 == y
