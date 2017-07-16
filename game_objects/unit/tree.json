@@ -20,7 +20,11 @@
 			},
 			{
 				"item" : 21,
-				"percent" : 50
+				"percent" : 80
+			},
+			{
+				"item" : 21,
+				"percent" : 80
 			}
 		]
 	}
