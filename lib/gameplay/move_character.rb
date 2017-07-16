@@ -10,15 +10,20 @@ module Gameplay
 
       #if char is locked
       if cell_from.is_solid?
-        top = world.get_cell(x, y-1)
-        left = world.get_cell(x-1, y)
-        bottom = world.get_cell(x, y+1)
-        right = world.get_cell(x+1, y)
+        top = world.get_cell(cell_from.x, cell_from.y-1)
+        left = world.get_cell(cell_from.x-1, cell_from.y)
+        bottom = world.get_cell(cell_from.x, cell_from.y+1)
+        right = world.get_cell(cell_from.x+1, cell_from.y)
 
-        player.character.cell = top if    !top.is_solid?    and cell_to.y >= cell_from.y
-        player.character.cell = left if   !left.is_solid?   and cell_to.y <= cell_from.y
-        player.character.cell = bottom if !bottom.is_solid? and cell_to.x >= cell_from.x
-        player.character.cell = right if  !right.is_solid?  and cell_to.x <= cell_from.x
+        if !top.is_solid? and cell_to.y < cell_from.y
+          player.character.cell = top
+        elsif !bottom.is_solid? and cell_to.y > cell_from.y
+          player.character.cell = bottom
+        elsif !left.is_solid? and cell_to.x < cell_from.x
+          player.character.cell = left
+        elsif !right.is_solid?  and cell_to.x > cell_from.x
+          player.character.cell = right
+        end
       end
 
       return false if cell_from.distance_to(cell_to) > LIMIT_MOVE

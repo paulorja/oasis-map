@@ -4,6 +4,24 @@
     "solid" : true
   },
   "private" : {
-    "tsx_id" : 7
+    "tsx_id" : 7,
+    "drops" : [
+      {
+        "item" : 18,
+        "percent" : 100
+      },
+      {
+        "item" : 18,
+        "percent" : 50
+      },
+      {
+        "item" : 18,
+        "percent" : 50
+      },
+      {
+        "item" : 18,
+        "percent" : 50
+      }
+    ]
   }
 }

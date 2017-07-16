@@ -1,16 +1,25 @@
 [
   {
-    "id" : 11,
-    "exp" : 30,
+      "id" : 7,
+      "exp" : 10,
+      "required" : [
+        { "item_id" : 20, "amount" : 1}
+      ]
+  },
+  {
+    "id" : 4,
+    "exp" : 25,
     "required" : [
-      { "item_id" : 20, "amount" : 3}
+      { "item_id" : 19, "amount" : 5},
+      { "item_id" : 20, "amount" : 1}
     ]
   },
   {
-    "id" : 12,
-    "exp" : 50,
+    "id" : 6,
+    "exp" : 25,
     "required" : [
-      { "item_id" : 20, "amount" : 5}
+      { "item_id" : 19, "amount" : 5},
+      { "item_id" : 20, "amount" : 1}
     ]
   }
 ]

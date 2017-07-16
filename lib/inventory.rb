@@ -16,11 +16,13 @@ class Inventory
     @items.delete_at @items.index item
   end
 
-  def remove_by_id(id)
-    @items.each_with_index do |item, index|
-      if item['public']['id'] == id
-        @items.delete_at index
-        break
+  def remove_by_id(id, amount = 1)
+    amount.times do
+      @items.each_with_index do |item, index|
+        if item['public']['id'] == id
+          @items.delete_at index
+          break
+        end
       end
     end
   end
@@ -36,9 +38,15 @@ class Inventory
     nil
   end
 
-  def exist_item?(item_id)
+  def exist_item?(item_id, amount = 1)
+    amount_found = 0
     @items.each do |item|
-      return true if item['public']['id'] == item_id
+      if item['public']['id'] == item_id
+        amount_found += 1
+      end
+      if item['public']['id'] == item_id and amount == amount_found
+        return true
+      end
     end
     false
   end

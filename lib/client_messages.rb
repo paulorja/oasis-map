@@ -69,4 +69,11 @@ class ClientMessages
     })
   end
 
+  def self.craft_info(info)
+    JsonMsg.success({
+      message: 'craft_info',
+      craft_info: info
+    })
+  end
+
 end

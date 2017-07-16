@@ -14,6 +14,7 @@ module Gameplay
 
         # seed
         if item['private']['seed']
+          stop_character
           if player.character.cell.unit.nil?
             player.character.cell.unit = world.units[item['private']['seed']['seed_unit_tsx_id']]
             player.character.inventory.remove_by_id item['public']['id']
@@ -22,6 +23,27 @@ module Gameplay
             server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
           end
         end
+
+        #build
+        if item['private']['build']
+          stop_character
+          if player.character.cell.unit.nil?
+            player.character.cell.unit = world.units[item['private']['build']['unit_tsx_id']]
+            player.character.inventory.remove_by_id item['public']['id']
+            world.refresh_pathfinding
+            server.send ClientMessages.inventory(player.character.inventory), ws
+            server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
+          end
+        end
+
+      end
+    end
+
+    private
+
+    def stop_character
+      if player.character.is_moving
+        Gameplay::MoveCharacter.new(type, { 'to_x' => player.character.current_pos[0], 'to_y' => player.character.current_pos[1]}, server, player, world, ws).run
       end
     end
 

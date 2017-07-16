@@ -1,6 +1,6 @@
 class Character
 
-  attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_exp
+  attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level
 
   def initialize(nickname, body_style)
     @nickname = nickname
@@ -18,8 +18,10 @@ class Character
     @face = nil
     #
     @inventory = Inventory.new
-    #
+    # craft
+    @craft_list = []
     @craft_exp = 0
+    @craft_level = 1
   end
 
   def client_data
@@ -37,6 +39,14 @@ class Character
       right_hand: @right_hand == nil ? nil : @right_hand['public'],
       face: @face == nil ? nil : @face['public']
   	}
+  end
+
+  def craft_info
+    {
+      exp: craft_exp,
+      level: craft_level,
+      next_level_exp: next_craft_level_exp
+    }
   end
 
   def set_pathfinding(pathfinding)
@@ -162,11 +172,45 @@ class Character
     @end_move_at > Time.now.to_f
   end
 
-  def craft_list
-    craft_list = []
-    craft_list += GameObjectLoader.load_craft 1
-    craft_list += GameObjectLoader.load_craft 2 if @craft_exp > 150
-    craft_list
+  def refresh_craft_list
+    @craft_list = []
+    i = 1
+    craft_level.times do
+      @craft_list += GameObjectLoader.load_craft i
+      i += 1
+    end
+  end
+
+  def craft(craft_item, items)
+    #validate
+    craft_item['required'].each do |required_item|
+      return false unless inventory.exist_item? required_item['item_id'], required_item['amount']
+    end
+    #remove
+    craft_item['required'].each do |required_item|
+      inventory.remove_by_id required_item['item_id'], required_item['amount']
+    end
+    inventory.add(items[craft_item['id']])
+    true
+  end
+
+  def add_craft_exp(exp)
+    @craft_exp += exp
+    if next_craft_level_exp and @craft_exp >= next_craft_level_exp
+      @craft_exp -= next_craft_level_exp
+      if Character.craft_levels[@craft_level].is_a? Integer
+        @craft_level += 1
+      end
+      refresh_craft_list
+    end
+  end
+
+  def next_craft_level_exp
+    Character.craft_levels[craft_level]
+  end
+
+  def self.craft_levels
+    [0, 5, 25, 50, 100]
   end
 
 end

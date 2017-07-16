@@ -9,21 +9,16 @@ class Authentication
 
       player.character.inventory.add world.items[1]
       player.character.inventory.add world.items[3]
-      player.character.inventory.add world.items[4]
-      player.character.inventory.add world.items[5]
-      player.character.inventory.add world.items[7]
       player.character.inventory.add world.items[8]
       player.character.inventory.add world.items[9]
-      player.character.inventory.add world.items[10]
-      player.character.inventory.add world.items[11]
-      player.character.inventory.add world.items[12]
-      player.character.inventory.add world.items[13]
-  	  player.character.inventory.add world.items[14]
-      player.character.inventory.add world.items[15]
-      player.character.inventory.add world.items[16]
-      player.character.inventory.add world.items[17]
+
+      30.times do
+        player.character.inventory.add world.items[18]
+        player.character.inventory.add world.items[20]
+      end
 
       server.send ClientMessages.inventory(player.character.inventory), ws
+      player.character.refresh_craft_list
       server.send ClientMessages.refresh_craft_list(player.character.craft_list), ws
       server.send ClientMessages.init_world(world.height, world.width, world.part_of_world(0, 0, 10)), ws
       server.send ClientMessages.all_characters(players), ws
