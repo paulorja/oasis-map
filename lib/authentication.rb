@@ -12,11 +12,6 @@ class Authentication
       player.character.inventory.add world.items[8]
       player.character.inventory.add world.items[9]
 
-      30.times do
-        player.character.inventory.add world.items[18]
-        player.character.inventory.add world.items[20]
-      end
-
       server.send ClientMessages.inventory(player.character.inventory), ws
       player.character.refresh_craft_list
       server.send ClientMessages.refresh_craft_list(player.character.craft_list), ws
