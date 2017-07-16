@@ -54,6 +54,13 @@ class ClientMessages
     })
   end
 
+  def self.refresh_craft_list(craft_list)
+    JsonMsg.success({
+        message: 'refresh_craft_list',
+        craft_list: craft_list
+    })
+  end
+
   def self.global_chat(config)
     JsonMsg.success({
       message: 'global_chat',

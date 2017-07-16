@@ -1,0 +1,12 @@
+{
+  "public" : {
+    "type" : "item",
+    "equip_on" : "right_hand",
+    "sprite" : "wood_bat",
+    "attack" : 5,
+    "id" : 24
+  },
+  "private" : {
+
+  }
+}

@@ -8,6 +8,10 @@ class GameObjectLoader
     tsx_loader 'unit'
   end
 
+  def self.load_craft(level)
+    JSON.parse(File.read("./game_objects/crafting/crafting_level_#{level}.json"))
+  end
+
   def self.load_items
     items = {}
     Dir.glob("./game_objects/item/*.json") do |item_file|

@@ -1,6 +1,6 @@
 class Character
 
-  attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown
+  attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_exp
 
   def initialize(nickname, body_style)
     @nickname = nickname
@@ -18,6 +18,8 @@ class Character
     @face = nil
     #
     @inventory = Inventory.new
+    #
+    @craft_exp = 0
   end
 
   def client_data
@@ -159,4 +161,12 @@ class Character
   def is_moving
     @end_move_at > Time.now.to_f
   end
+
+  def craft_list
+    craft_list = []
+    craft_list += GameObjectLoader.load_craft 1
+    craft_list += GameObjectLoader.load_craft 2 if @craft_exp > 150
+    craft_list
+  end
+
 end

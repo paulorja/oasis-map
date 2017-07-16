@@ -1,0 +1,12 @@
+{
+  "public" : {
+    "type" : "item",
+    "sprite" : "stone_wall",
+    "id" : 22
+  },
+  "private" : {
+    "build" : {
+      "unit_tsx_id" : 7
+    }
+  }
+}
