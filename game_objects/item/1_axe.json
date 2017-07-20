@@ -3,7 +3,7 @@
     "type" : "item",
     "equip_on" : "right_hand",
     "sprite" : "axe",
-    "can_collect" : ["tree", "tree2", "tree3"],
+    "can_collect" : [0, 1, 2],
     "attack" : 3,
     "id" : 1
   },

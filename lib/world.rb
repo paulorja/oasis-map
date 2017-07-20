@@ -14,7 +14,7 @@ class World
   end
 
   def add_character(character)
-    char_cell = get_cell(63, 65)
+    char_cell = get_cell(123, 125)
     character.cell = char_cell
   end
 

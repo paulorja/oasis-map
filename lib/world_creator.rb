@@ -20,7 +20,7 @@ class WorldCreator
           y = index / layer['width']
 
           id_terrain = cell - @world_json['tilesets'][0]['firstgid']
-          @world[x][y] = Cell.new(@terrains[id_terrain], nil, x, y)
+          @world[x][y] = Cell.new(id_terrain, nil, x, y)
         end
       end
 
@@ -30,9 +30,13 @@ class WorldCreator
           x = index % layer['width']
           y = index / layer['width']
 
-          id_unit = cell - @world_json['tilesets'][1]['firstgid']
-          if @units[id_unit]
-            @world[x][y].unit = @units[id_unit]
+          if cell > 0
+            id_unit = cell - @world_json['tilesets'][1]['firstgid']
+            if @units[id_unit]
+              @world[x][y].set_unit id_unit
+            else
+              raise "unit with id #{id_unit} not exist"
+            end
           end
         end
       end

@@ -15,8 +15,8 @@ module Gameplay
         # seed
         if item['private']['seed']
           stop_character
-          if player.character.cell.unit.nil?
-            player.character.cell.unit = world.units[item['private']['seed']['seed_unit_tsx_id']]
+          if player.character.cell.unit_id.nil?
+            player.character.cell.set_unit(item['private']['seed']['seed_unit_tsx_id'])
             player.character.inventory.remove_by_id item['public']['id']
             world.add_event GameEvents::EventSeed.new(item['private']['seed']['time'], player.character.cell, world)
             server.send ClientMessages.inventory(player.character.inventory), ws
@@ -27,8 +27,8 @@ module Gameplay
         #build
         if item['private']['build']
           stop_character
-          if player.character.cell.unit.nil?
-            player.character.cell.unit = world.units[item['private']['build']['unit_tsx_id']]
+          if player.character.cell.unit_id.nil?
+            player.character.cell.set_unit(item['private']['build']['unit_tsx_id'])
             player.character.inventory.remove_by_id item['public']['id']
             world.refresh_pathfinding
             server.send ClientMessages.inventory(player.character.inventory), ws

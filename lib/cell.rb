@@ -1,31 +1,50 @@
 class Cell
   
-  attr_accessor :terrain, :unit, :drops, :x, :y
+  attr_reader :unit_id, :terrain_id, :drops, :x, :y
 
-  def initialize(terrain, unit, x, y)
-    @terrain = terrain
-    @unit = unit
+  def initialize(terrain_id, unit_id, x, y)
+    @terrain_id = terrain_id
+    @unit_id = unit_id
     @drops = []
     @x = x
     @y = y
   end
 
   def client_data 
-  	{
-  		terrain: @terrain['public'],
-  		unit: @unit != nil ? @unit['public'] : nil,
-      drops: @drops,
+  	data = {
+  		t: @terrain_id,
       x: @x,
       y: @y
   	}
+    data[:u] = @unit_id unless @unit_id.nil?
+    data[:drops] = @drops unless @drops.nil?
+    data
   end
 
   def add_drop(item)
     @drops.push({item: item, x: rand(32), y: rand(32)})
   end
 
+  def t_data
+    TERRAINS[@terrain_id]
+  end
+
+  def u_data
+    UNITS[@unit_id]
+  end
+
+  def set_unit id
+    if id.nil?
+      @unit_id = nil
+    elsif UNITS[id]
+      @unit_id = id
+    else
+      raise 'UNIT NOT EXIST'
+    end
+  end
+
   def is_solid?
-    if terrain['public']['solid'] or (unit and unit['public']['solid'])
+    if t_data['solid'] or (u_data and u_data['solid'])
       true
     else
       false
@@ -38,8 +57,8 @@ class Cell
 
   def get_unit_drops
     drops = []
-    if unit
-      unit['private']['drops'].each do |drop|
+    if u_data
+      u_data['drops'].each do |drop|
         drops << drop['item'] if rand(100) <= drop['percent']
       end
     end

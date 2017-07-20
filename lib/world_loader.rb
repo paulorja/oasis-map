@@ -6,8 +6,7 @@ class WorldLoader
       Log.log 'world load ok'
       return world_json
     rescue
-      Log.alert 'Failed to load world'
-      exit
+      raise 'Failed to load world'
     end
   end
 

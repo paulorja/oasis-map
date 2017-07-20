@@ -29,6 +29,9 @@ require './lib/pathfinding_generator'
 require './lib/authentication'
 require './lib/inventory'
 
+TERRAINS = GameObjectLoader.load_terrains
+UNITS = GameObjectLoader.load_units
+
 class Server
 
   def initialize

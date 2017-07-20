@@ -24,14 +24,14 @@ class Authentication
           {nickname: 'Server', chat_message: "#{player.character.nickname} entrou."}))
 
 
-      world.get_cell(62, 64).unit = world.units[2]
-      world.get_cell(64, 64).unit = world.units[2]
-      world.get_cell(62, 66).unit = world.units[3]
-      world.get_cell(64, 66).unit = world.units[3]
-      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(62, 64)))
-      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(64, 64)))
-      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(62, 66)))
-      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(64, 66)))
+      world.get_cell(122, 124).set_unit 2
+      world.get_cell(124, 124).set_unit 2
+      world.get_cell(122, 126).set_unit 3
+      world.get_cell(124, 126).set_unit 3
+      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(122, 124)))
+      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(124, 124)))
+      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(122, 126)))
+      server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(124, 126)))
     end
   end
 

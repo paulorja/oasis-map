@@ -1,0 +1,26 @@
+{
+	"solid" : true,
+	"id" : 0,
+	"drops" : [
+		{
+			"item" : 19,
+			"percent" : 100
+		},
+		{
+			"item" : 19,
+			"percent" : 80
+		},
+		{
+			"item" : 19,
+			"percent" : 60
+		},
+		{
+			"item" : 21,
+			"percent" : 80
+		},
+		{
+			"item" : 21,
+			"percent" : 80
+		}
+	]
+}

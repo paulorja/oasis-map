@@ -3,7 +3,7 @@
     "type" : "item",
     "equip_on" : "right_hand",
     "sprite" : "pick",
-    "can_collect" : ["stone", "stone_wall"],
+    "can_collect" : [3, 7, 8],
     "attack" : 2,
     "id" : 3
   },

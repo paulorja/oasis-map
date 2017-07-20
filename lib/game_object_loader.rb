@@ -30,15 +30,13 @@ class GameObjectLoader
     objects = {}
     Dir.glob("./game_objects/#{dir}/*.json") do |objects_file|
       objects_json = JSON.parse(File.read(objects_file))
-      if objects_json['private'].nil? or objects_json['private']['tsx_id'].nil?
-        Log.alert "Can not found tsx id from file => #{objects_file} json =: #{objects_json.inspect}"
-        exit
+      if objects_json['id'].nil?
+        raise "Can not found id from file => #{objects_file} json =: #{objects_json.inspect}"
       end
-      if objects[objects_json['private']['tsx_id']].nil?
-        objects[objects_json['private']['tsx_id']] = objects_json
+      if objects[objects_json['id']].nil?
+        objects[objects_json['id']] = objects_json
       else
-        Log.alert "TSX ID ALREADY USED file => #{objects_file} json =: #{objects_json.inspect}"
-        exit
+        raise "ID ALREADY USED file => #{objects_file} json =: #{objects_json.inspect}"
       end
     end
     Log.log("#{dir} loader ok")
