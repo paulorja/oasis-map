@@ -57,7 +57,7 @@ class Cell
 
   def get_unit_drops
     drops = []
-    if u_data
+    if u_data and u_data['drops']
       u_data['drops'].each do |drop|
         drops << drop['item'] if rand(100) <= drop['percent']
       end
