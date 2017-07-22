@@ -22,6 +22,7 @@ require './lib/gameplay/craft'
 require './lib/gameplay/request_craft'
 require './lib/gameevent/gameevent'
 require './lib/gameevent/event_seed'
+require './lib/gameevent/spawn_unit'
 require './lib/game_object_loader'
 require './lib/world_loader'
 require './lib/world_creator'
@@ -31,6 +32,7 @@ require './lib/inventory'
 
 TERRAINS = GameObjectLoader.load_terrains
 UNITS = GameObjectLoader.load_units
+UNIT_SPAWNS = GameObjectLoader.load_unit_spawns
 
 class Server
 

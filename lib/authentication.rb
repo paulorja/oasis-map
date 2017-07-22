@@ -24,8 +24,8 @@ class Authentication
           {nickname: 'Server', chat_message: "#{player.character.nickname} entrou."}))
 
 
-      world.get_cell(124, 124).set_unit 2
-      world.get_cell(127, 124).set_unit 2
+      world.get_cell(124, 124).set_unit 0
+      world.get_cell(127, 124).set_unit 0
       world.get_cell(124, 127).set_unit 3
       world.get_cell(127, 127).set_unit 3
       server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(124, 124)))

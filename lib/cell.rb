@@ -1,10 +1,11 @@
 class Cell
   
-  attr_reader :unit_id, :terrain_id, :drops, :x, :y
+  attr_reader :unit_id, :terrain_id, :drops, :x, :y, :spawn_index
 
   def initialize(terrain_id, unit_id, x, y)
     @terrain_id = terrain_id
     @unit_id = unit_id
+    @spawn_index = nil
     @drops = []
     @x = x
     @y = y
@@ -33,11 +34,15 @@ class Cell
     UNITS[@unit_id]
   end
 
-  def set_unit id
+  def set_unit(id, spawn_index = nil)
     if id.nil?
       @unit_id = nil
+      @spawn_index = nil
     elsif UNITS[id]
       @unit_id = id
+      if spawn_index
+        @spawn_index = spawn_index
+      end
     else
       raise 'UNIT NOT EXIST'
     end

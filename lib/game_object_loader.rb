@@ -12,6 +12,19 @@ class GameObjectLoader
     JSON.parse(File.read("./game_objects/crafting/crafting_level_#{level}.json"))
   end
 
+  def self.load_unit_spawns
+    unit_spawns = {}
+    Dir.glob("./game_objects/spawn_unit/*.json") do |spawn_file|
+      spawn_json = JSON.parse(File.read(spawn_file))
+      if unit_spawns[spawn_json['id']].nil?
+        unit_spawns[spawn_json['id']] = spawn_json
+      else
+        raise "ID ALREADY USED file => #{spawn_file} json =: #{spawn_json.inspect}"
+      end
+    end
+    unit_spawns
+  end
+
   def self.load_items
     items = {}
     Dir.glob("./game_objects/item/*.json") do |item_file|
@@ -19,8 +32,7 @@ class GameObjectLoader
       if items[item_json['public']['id']].nil?
         items[item_json['public']['id']] = item_json
       else
-        Log.alert "ID ALREADY USED file => #{item_file} json =: #{item_json.inspect}"
-        exit
+        raise "ID ALREADY USED file => #{item_file} json =: #{item_json.inspect}"
       end
     end
     items

@@ -8,6 +8,9 @@ module Gameplay
         if char.is_cooldown_ok
           if cell.unit_id and char.right_hand and char.right_hand['public']['can_collect'].include? cell.unit_id
             cell.get_unit_drops.each { |item_id| cell.add_drop(world.items[item_id])}
+            if cell.spawn_index
+              world.add_event GameEvents::SpawnUnit.new cell.spawn_index, world
+            end
             cell.set_unit(nil)
             world.refresh_pathfinding
             player.character.cooldown = Time.now.to_f + 0.5
