@@ -1,0 +1,12 @@
+{
+  "public" : {
+    "type" : "item",
+    "sprite" : "fence",
+    "id" : 25
+  },
+  "private" : {
+    "build" : {
+      "unit_tsx_id" : 9
+    }
+  }
+}

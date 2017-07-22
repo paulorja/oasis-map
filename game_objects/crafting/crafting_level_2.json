@@ -1,5 +1,12 @@
 [
   {
+    "id" : 25,
+    "exp" : 3,
+    "required" : [
+      { "item_id" : 19, "amount" : 3}
+    ]
+  },
+  {
       "id" : 7,
       "exp" : 10,
       "required" : [
