@@ -44,6 +44,7 @@ class Cell
   end
 
   def is_solid?
+    return false if u_data and u_data['bridge'] and u_data['bridge'] == true
     if t_data['solid'] or (u_data and u_data['solid'])
       true
     else
