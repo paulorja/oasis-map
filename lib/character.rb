@@ -9,7 +9,7 @@ class Character
     @end_move_at = Time.now.to_f
     @cooldown = Time.now.to_f
     @pathfinding = nil
-    @speed = 0.05
+    @speed = 0.005
     @body_style = body_style
     # equip
     @right_hand = nil
