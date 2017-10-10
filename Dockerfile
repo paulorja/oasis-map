@@ -1,9 +1,9 @@
 FROM ruby:2.3.0
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /oasis-server
+WORKDIR /oasis-server
 
-COPY . /usr/src/app
+COPY . /oasis-server
 
 RUN bundle install
 
