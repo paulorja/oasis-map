@@ -39,6 +39,8 @@ class World
       Gameplay::Craft.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'request_craft'
       Gameplay::RequestCraft.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'character_data'
+      Gameplay::CharacterData.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'char_action'
       #todo
     else

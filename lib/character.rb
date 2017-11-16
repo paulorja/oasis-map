@@ -1,6 +1,7 @@
 class Character
 
   attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level
+  attr_reader :str, :agi, :int, :luk, :hp, :max_hp
 
   def initialize(nickname, body_style)
     @nickname = nickname
@@ -9,7 +10,6 @@ class Character
     @end_move_at = Time.now.to_f
     @cooldown = Time.now.to_f
     @pathfinding = nil
-    @speed = 0.2
     @body_style = body_style
     # equip
     @right_hand = nil
@@ -22,6 +22,19 @@ class Character
     @craft_list = []
     @craft_exp = 0
     @craft_level = 1
+    # attributes
+    @str = 1
+    @agi = 1
+    @int = 1
+    @luk = 1
+    #status
+    @speed = 0.5
+    @hp = 10
+    @max_hp = 10
+  end
+
+  def get_atk
+  
   end
 
   def client_data
@@ -39,6 +52,16 @@ class Character
       right_hand: @right_hand == nil ? nil : @right_hand['public'],
       face: @face == nil ? nil : @face['public']
   	}
+  end
+
+  def character_data
+    {
+      str: @str,
+      agi: @agi,
+      int: @int,
+      hp: @hp,
+      max_hp: @max_hp
+    }
   end
 
   def craft_info

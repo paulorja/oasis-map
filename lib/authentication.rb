@@ -15,6 +15,7 @@ class Authentication
       server.send ClientMessages.inventory(player.character.inventory), ws
       player.character.refresh_craft_list
       server.send ClientMessages.refresh_craft_list(player.character.craft_list), ws
+      server.send ClientMessages.character_data(player.character.character_data), ws
       server.send ClientMessages.init_world(world.height, world.width, world.part_of_world(0, 0, 10)), ws
       server.send ClientMessages.all_characters(players), ws
       world.add_character player.character
