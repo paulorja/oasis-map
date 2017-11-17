@@ -1,9 +1,9 @@
 class Character
 
-  attr_accessor :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level
-  attr_reader :str, :agi, :int, :luk, :hp, :max_hp
+  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp
 
-  def initialize(nickname, body_style)
+  def initialize(nickname, body_style, ws_id = nil)
+    @ws_id = ws_id
     @nickname = nickname
     @cell = nil
     @start_move_at = Time.now.to_f
@@ -23,10 +23,10 @@ class Character
     @craft_exp = 0
     @craft_level = 1
     # attributes
-    @str = 1
-    @agi = 1
-    @int = 1
-    @luk = 1
+    @str = 3
+    @agi = 6
+    @int = 2
+    @luk = 8
     #status
     @speed = 0.5
     @hp = 10
@@ -34,7 +34,8 @@ class Character
   end
 
   def get_atk
-  
+    atk = @str
+    atk += sum_equip_attr('attack')
   end
 
   def client_data
@@ -50,7 +51,8 @@ class Character
       head: @head == nil ? nil : @head['public'],
       body: @body == nil ? nil : @body['public'],
       right_hand: @right_hand == nil ? nil : @right_hand['public'],
-      face: @face == nil ? nil : @face['public']
+      face: @face == nil ? nil : @face['public'],
+      id: object_id
   	}
   end
 
@@ -59,6 +61,7 @@ class Character
       str: @str,
       agi: @agi,
       int: @int,
+      luk: @luk,
       hp: @hp,
       max_hp: @max_hp
     }
@@ -234,6 +237,20 @@ class Character
 
   def self.craft_levels
     [0, 5, 25, 50, 100]
+  end
+
+  def equips_ar
+    [@body, @head, @right_hand, @face] 
+  end
+
+  private 
+
+  def sum_equip_attr(attr)
+    sum = 0
+    equips_ar.each do |equip|
+      sum += equip[attr] if equip and equip[attr]
+    end
+    sum
   end
 
 end

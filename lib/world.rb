@@ -42,7 +42,7 @@ class World
     when 'character_data'
       Gameplay::CharacterData.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'char_action'
-      #todo
+      Gameplay::CharacterAction.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     else
       raise 'fuck'
     end
@@ -111,4 +111,9 @@ class World
     end
   end
 
+  def distance_of(x1, y1, x2, y2)
+    distance = Math.sqrt(((x2-x1)**2) + ((y2-y1)**2))
+    '%.1f' % distance
+  end
+  
 end

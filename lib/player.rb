@@ -2,8 +2,8 @@ class Player
 
   attr_accessor :character
 
-  def initialize(nickname, body_style)
-    @character = Character.new(nickname, body_style)
+  def initialize(nickname, body_style, ws_id)
+    @character = Character.new(nickname, body_style, ws_id)
   end
   
   def is_valid?

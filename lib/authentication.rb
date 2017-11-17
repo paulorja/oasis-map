@@ -1,7 +1,7 @@
 class Authentication
 
   def self.auth(json_msg, server, ws, world, players)
-    player = Player.new(json_msg['nickname'], json_msg['body_style'])
+    player = Player.new(json_msg['nickname'], json_msg['body_style'], ws.object_id)
     if player.is_valid?
       players[ws.object_id] = player
       server.subscribe_channel('all', ws)

@@ -79,7 +79,15 @@ class ClientMessages
   def self.character_data(data)
     JsonMsg.success({
       message: 'character_data',
-      craft_info: data
+      character_data: data
+    })
+  end
+
+  def self.character_animation(config)
+    JsonMsg.success({
+      message: 'character_animation',
+      nickname: config[:nickname], 
+      animation: config[:animation]
     })
   end
 
