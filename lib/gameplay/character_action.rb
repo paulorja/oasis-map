@@ -9,9 +9,9 @@ module Gameplay
         pos2 = @player.character.current_pos
         distance = @world.distance_of(pos1[0], pos1[1], pos2[0], pos2[1])
 
-        if distance.to_f < 2.to_f
+        if distance.to_f < 2.to_f and char.nickname != player.character.nickname
           # attack
-          total_damage = 1
+          total_damage = char.get_atk + rand(5) -2
 
           char.hp -= total_damage
           puts char.character_data
