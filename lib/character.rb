@@ -52,19 +52,14 @@ class Character
       body: @body == nil ? nil : @body['public'],
       right_hand: @right_hand == nil ? nil : @right_hand['public'],
       face: @face == nil ? nil : @face['public'],
-      id: object_id
-  	}
-  end
-
-  def character_data
-    {
+      id: object_id,
       str: @str,
       agi: @agi,
       int: @int,
       luk: @luk,
       hp: @hp,
       max_hp: @max_hp
-    }
+  	}
   end
 
   def craft_info
