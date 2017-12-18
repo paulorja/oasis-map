@@ -3,6 +3,7 @@ require 'json'
 require 'colorize'
 require 'chingu_pathfinding'
 require 'set'
+require 'byebug'
 
 require './lib/json_msg'
 require './lib/client_messages'
@@ -21,6 +22,7 @@ require './lib/gameplay/character_data'
 require './lib/gameplay/use_item'
 require './lib/gameplay/remove_equip'
 require './lib/gameplay/craft'
+require './lib/gameplay/increment_char_attr'
 require './lib/gameplay/request_craft'
 require './lib/gameevent/gameevent'
 require './lib/gameevent/event_seed'
@@ -84,6 +86,7 @@ class Server
           end
         rescue => exception
           puts exception.backtrace
+          raise
         end
 	  }
     

@@ -22,6 +22,10 @@ RSpec.describe "character" do
     it "move" do
 
     end
+
+    it "character increment attr" do
+      
+    end
   end
 
 end

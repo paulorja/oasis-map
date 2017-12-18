@@ -27,6 +27,7 @@ class Character
     @agi = 6
     @int = 2
     @luk = 8
+    @attribute_balance = 3
     #status
     @speed = 0.5
     @hp = 10
@@ -57,6 +58,7 @@ class Character
       agi: @agi,
       int: @int,
       luk: @luk,
+      attribute_balance: @attribute_balance, 
       hp: @hp,
       max_hp: @max_hp
   	}
@@ -122,6 +124,15 @@ class Character
 
   def valid_body_style
     %w(1 2 3 4 5 6).include? @body_style
+  end
+
+  def increment_attr(attr)
+    if attribute_list.include? attr and @attribute_balance > 0
+      attr_value = instance_variable_get("@#{attr}") 
+      instance_variable_set("@#{attr}", attr_value + 1) 
+      @attribute_balance -= 1
+      true
+    end
   end
 
   def equip(item)
@@ -246,6 +257,10 @@ class Character
       sum += equip[attr] if equip and equip[attr]
     end
     sum
+  end
+
+  def attribute_list
+    ['str', 'int', 'luk', 'agi']
   end
 
 end

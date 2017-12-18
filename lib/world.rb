@@ -43,8 +43,10 @@ class World
       Gameplay::CharacterData.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     when 'char_action'
       Gameplay::CharacterAction.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+    when 'increment_char_attr'
+      Gameplay::IncrementCharAttr.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
     else
-      raise 'fuck'
+      raise 'comand not exist'
     end
   end
 
