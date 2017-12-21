@@ -1,6 +1,6 @@
 class Character
 
-  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp
+  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp, :attribute_balance
 
   def initialize(nickname, body_style, ws_id = nil)
     @ws_id = ws_id
@@ -23,18 +23,22 @@ class Character
     @craft_exp = 0
     @craft_level = 1
     # attributes
-    @str = 3
-    @agi = 6
-    @int = 2
-    @luk = 8
-    @attribute_balance = 3
+    @str = 1
+    @agi = 1
+    @int = 1
+    @luk = 1
+    @attribute_balance = 5
     #status
     @speed = 0.5
-    @hp = 10
-    @max_hp = 10
+    @hp = 30
+    @max_hp = calc_max_hp
   end
 
-  def get_atk
+  def calc_max_hp
+    30 + (@str * 2)
+  end
+
+  def calc_atk
     atk = @str
     atk += sum_equip_attr('attack')
   end
@@ -131,8 +135,13 @@ class Character
       attr_value = instance_variable_get("@#{attr}") 
       instance_variable_set("@#{attr}", attr_value + 1) 
       @attribute_balance -= 1
+      refresh_attributes
       true
     end
+  end
+  
+  def refresh_attributes
+    @max_hp = calc_max_hp
   end
 
   def equip(item)
@@ -254,7 +263,7 @@ class Character
   def sum_equip_attr(attr)
     sum = 0
     equips_ar.each do |equip|
-      sum += equip[attr] if equip and equip[attr]
+      sum += equip['public'][attr] if equip and equip['public'][attr]
     end
     sum
   end

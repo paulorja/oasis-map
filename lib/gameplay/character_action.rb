@@ -10,13 +10,15 @@ module Gameplay
 
         if distance.to_f < 2.to_f and char.nickname != player.character.nickname
           # attack
-          total_damage = char.get_atk + rand(5) -2
+          total_damage = player.character.calc_atk + rand(5) -2
 
           char.hp -= total_damage
           
+          # kill
           if char.hp < 0 
             char.cell = @world.get_cell(123, 125)
             char.hp = char.max_hp
+            player.character.attribute_balance += 1
           end
 
           server.send(ClientMessages.character_data(char.client_data), char_ws)
