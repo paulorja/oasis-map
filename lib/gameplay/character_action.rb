@@ -1,6 +1,5 @@
 module Gameplay
   class CharacterAction < GameplayCmd
-
     def run
       char = ObjectSpace._id2ref(params['char_id'])
       if char and char.is_a? Character
@@ -14,6 +13,12 @@ module Gameplay
           total_damage = char.get_atk + rand(5) -2
 
           char.hp -= total_damage
+          
+          if char.hp < 0 
+            char.cell = @world.get_cell(123, 125)
+            char.hp = char.max_hp
+          end
+
           server.send(ClientMessages.character_data(char.client_data), char_ws)
           
           animation = {
@@ -22,10 +27,9 @@ module Gameplay
           }
 
           server.channel_push('all', ClientMessages.character_animation({nickname: char.nickname, animation: animation}))
+          server.channel_push('all', ClientMessages.refresh_character(char))
         end
       end
-
     end
-
   end
 end
