@@ -14,8 +14,7 @@ module Gameplay
           total_damage = char.get_atk + rand(5) -2
 
           char.hp -= total_damage
-          puts char.character_data
-          server.send(ClientMessages.character_data(char.character_data), char_ws)
+          server.send(ClientMessages.character_data(char.client_data), char_ws)
           
           animation = {
             type: 'damage',
