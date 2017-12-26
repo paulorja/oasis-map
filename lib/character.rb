@@ -139,6 +139,11 @@ class Character
       true
     end
   end
+
+  def increment_hp(amount)
+    @hp += amount.to_i
+    @hp = @max_hp if @hp > @max_hp
+  end
   
   def refresh_attributes
     @max_hp = calc_max_hp

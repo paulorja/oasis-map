@@ -1,0 +1,13 @@
+{
+  "public" : {
+    "type" : "item",
+    "sprite" : "big_potion",
+    "id" : 27
+  },
+  "private" : {
+    "consume_effect" : {
+      "heal" : 15
+    },
+    "character_animation" : "potion_2"
+  }
+}

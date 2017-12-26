@@ -11,6 +11,9 @@ class Authentication
       player.character.inventory.add world.items[3]
       player.character.inventory.add world.items[8]
       player.character.inventory.add world.items[9]
+      player.character.inventory.add world.items[26]
+      player.character.inventory.add world.items[26]
+      player.character.inventory.add world.items[27]
 
       server.send ClientMessages.inventory(player.character.inventory), ws
       player.character.refresh_craft_list

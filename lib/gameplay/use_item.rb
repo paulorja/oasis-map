@@ -36,6 +36,25 @@ module Gameplay
           end
         end
 
+        #consume effect
+        if item['private']['consume_effect']
+          #effect
+          if item['private']['consume_effect']['heal']
+            player.character.increment_hp(item['private']['consume_effect']['heal'])
+          end
+
+          #remove item
+          player.character.inventory.remove_by_id item['public']['id']
+
+          #server
+          server.send ClientMessages.inventory(player.character.inventory), ws
+          server.send ClientMessages.character_data(player.character.client_data), ws
+        end
+
+        #character animation
+        if item['private']['consume_effect']
+
+        end 
       end
     end
 
