@@ -31,7 +31,6 @@ class Character
     #status
     @speed = 0.5
     @hp = 30
-    @max_hp = calc_max_hp
   end
 
   def calc_max_hp
@@ -64,7 +63,7 @@ class Character
       luk: @luk,
       attribute_balance: @attribute_balance, 
       hp: @hp,
-      max_hp: @max_hp
+      max_hp: calc_max_hp
   	}
   end
 
@@ -135,20 +134,16 @@ class Character
       attr_value = instance_variable_get("@#{attr}") 
       instance_variable_set("@#{attr}", attr_value + 1) 
       @attribute_balance -= 1
-      refresh_attributes
       true
     end
   end
 
   def increment_hp(amount)
+    max_hp = calc_max_hp
     @hp += amount.to_i
-    @hp = @max_hp if @hp > @max_hp
+    @hp = max_hp if @hp > max_hp
   end
   
-  def refresh_attributes
-    @max_hp = calc_max_hp
-  end
-
   def equip(item)
     if item['public']['equip_on']
       case item['public']['equip_on']

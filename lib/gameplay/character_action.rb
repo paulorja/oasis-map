@@ -18,7 +18,7 @@ module Gameplay
           # kill
           if char.hp < 0 
             char.cell = @world.get_cell(123, 125)
-            char.hp = char.max_hp
+            char.hp = char.calc_max_hp
             # add 1 attribute to killer
             player.character.attribute_balance += 1
           end

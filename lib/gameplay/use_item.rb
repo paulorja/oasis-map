@@ -52,8 +52,8 @@ module Gameplay
         end
 
         #character animation
-        if item['private']['consume_effect']
-
+        if item['private']['character_animation']
+          server.send ClientMessages.character_animation({nickname: player.character.nickname, animation: item['private']['character_animation']}), ws
         end 
       end
     end

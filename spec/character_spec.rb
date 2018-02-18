@@ -14,7 +14,7 @@ RSpec.describe "character" do
     end
 
     it "get atk" do
-      expect(@character.get_atk).to be(1)
+      expect(@character.calc_atk).to be(1)
     end
   end  
 
