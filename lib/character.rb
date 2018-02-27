@@ -1,6 +1,6 @@
 class Character
 
-  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp, :attribute_balance
+  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp, :attribute_balance, :end_delay_at
 
   def initialize(nickname, body_style, ws_id = nil)
     @ws_id = ws_id
@@ -8,6 +8,7 @@ class Character
     @cell = nil
     @start_move_at = Time.now.to_f
     @end_move_at = Time.now.to_f
+    @end_delay_at = Time.now.to_f
     @cooldown = Time.now.to_f
     @pathfinding = nil
     @body_style = body_style
@@ -125,6 +126,15 @@ class Character
     end
   end
 
+  def diff_delay
+    diff = @end_delay_at - Time.now.to_f
+    if diff > 0
+      diff
+    else
+      0
+    end
+  end
+
   def valid_body_style
     %w(1 2 3 4 5 6).include? @body_style
   end
@@ -205,8 +215,8 @@ class Character
     end
   end
 
-  def is_cooldown_ok
-    Time.now.to_f > @cooldown
+  def is_delay_ok 
+    Time.now.to_f > @end_delay_at 
   end
 
   def is_moving

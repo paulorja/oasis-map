@@ -27,7 +27,7 @@ module Gameplay
       end
 
       return false if cell_from.distance_to(cell_to) > LIMIT_MOVE
-      return false unless player.character.is_cooldown_ok
+      return false unless player.character.is_delay_ok
 
       if cell_from and cell_to and !cell_to.is_solid?
         pos_from = player.character.current_pos
