@@ -9,6 +9,7 @@ class Authentication
 
       player.character.inventory.add world.items[1]
       player.character.inventory.add world.items[3]
+      player.character.inventory.add world.items[7]
       player.character.inventory.add world.items[8]
       player.character.inventory.add world.items[9]
       player.character.inventory.add world.items[26]
