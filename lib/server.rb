@@ -47,6 +47,7 @@ class Server
   	@world = World.new
   	@players = {}
     create_channel('all')
+    start_resolve_events
 
   	EventMachine::WebSocket.start(
       host: '0.0.0.0', 
@@ -66,7 +67,6 @@ class Server
           end
 
           Log.log "Received: #{msg}"
-          @world.resolve_events self
 
           case json_msg['message']
           when 'auth'
@@ -108,6 +108,16 @@ class Server
   def send(msg, ws)
     Log.send(msg[0, 1000])
     ws.send msg
+  end
+
+  def start_resolve_events
+    Thread.new do
+      loop do
+        @world.resolve_events self
+        Log.log('resolving events')
+        sleep 1 
+      end
+    end
   end
 
   def channel_push(channel_id, msg)
