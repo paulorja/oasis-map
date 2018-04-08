@@ -3,6 +3,7 @@ class WorldCreator
   def self.create
     @world_json = WorldLoader.load_world
     spawn_units = []
+    npcs = []
 
     @world = []
     @world_json['width'].times do
@@ -59,10 +60,35 @@ class WorldCreator
           end
         end
       end
+
+      # NPC 
+      if layer['name'] == 'npc'
+        Log.log '[ LOAD NPCs ]'
+        layer['data'].each_with_index do |cell, index|
+          x = index % layer['width']
+          y = index / layer['width']
+
+          if cell > 0
+            id_npc = cell - @world_json['tilesets'][3]['firstgid']
+            if NPCS[id_npc]
+              npc = Npc.new(NPCS[id_npc]["name"], "1") 
+              npc.start_x = x
+              npc.start_y = y
+              npcs << npc
+            else
+              raise "npc with id #{id_npc} not exist"
+            end
+          end
+        end
+      end
     end
 
     Log.log '[ World init finished ]'
-    {world: @world , unit_spawn_areas: spawn_units }
+    return {
+      world: @world,
+      unit_spawn_areas: spawn_units,
+      npcs: npcs
+    }
   end
 
 end

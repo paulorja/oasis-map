@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "name": "Vendedor de Poções",
+  "ballons_list": [
+    {
+      "content": "Bem vindo a minha loja de pocoes!"
+    },
+    {
+      "type": "store",
+      "itens": [
+        {"id": 26, "price": 3},
+        {"id": 27, "price": 2}
+      ]
+    }
+  ]
+}

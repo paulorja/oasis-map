@@ -5,7 +5,6 @@ module Gameplay
 
       char = ObjectSpace._id2ref(params['char_id'])
       if char and char.is_a? Character
-        char_ws = ObjectSpace._id2ref(char.ws_id)
         pos1 = char.current_pos
         pos2 = @player.character.current_pos
         distance = @world.distance_of(pos1[0], pos1[1], pos2[0], pos2[1])
@@ -27,7 +26,10 @@ module Gameplay
             player.character.attribute_balance += 1
           end
 
-          server.send(ClientMessages.character_data(char.client_data), char_ws)
+          if char.ws_id
+            char_ws = ObjectSpace._id2ref(char.ws_id)
+            server.send(ClientMessages.character_data(char.client_data), char_ws)
+          end
           server.send ClientMessages.character_data(player.character.client_data), ws
           
           # DAMAGE ANIMATION

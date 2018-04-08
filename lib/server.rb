@@ -12,6 +12,7 @@ require './lib/world'
 require './lib/cell'
 require './lib/player'
 require './lib/character'
+require './lib/npc'
 require './lib/gameplay/gameplay_cmd'
 require './lib/gameplay/move_character'
 require './lib/gameplay/cell_action'
@@ -37,6 +38,7 @@ require './lib/inventory'
 TERRAINS = GameObjectLoader.load_terrains
 UNITS = GameObjectLoader.load_units
 UNIT_SPAWNS = GameObjectLoader.load_unit_spawns
+NPCS = GameObjectLoader.load_npcs
 
 class Server
 
@@ -46,6 +48,10 @@ class Server
   def start
   	@world = World.new
   	@players = {}
+    @world.npcs.each do |npc|
+      @players[npc.object_id] = npc
+      @world.add_character(npc.character, @world.get_cell(npc.start_x, npc.start_y)) 
+    end
     create_channel('all')
     start_resolve_events
 

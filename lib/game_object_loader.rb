@@ -8,6 +8,10 @@ class GameObjectLoader
     tsx_loader 'unit'
   end
 
+  def self.load_npcs
+    tsx_loader 'npc'
+  end
+
   def self.load_craft(level)
     JSON.parse(File.read("./game_objects/crafting/crafting_level_#{level}.json"))
   end

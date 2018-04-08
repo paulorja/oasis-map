@@ -1,11 +1,12 @@
 class World
 
-  attr_reader :width, :height, :items, :terrains, :units, :pathfinding, :events, :unit_spawn_areas
+  attr_reader :width, :height, :items, :terrains, :units, :pathfinding, :events, :unit_spawn_areas, :npcs
 
   def initialize
     world_created = WorldCreator.create
     @world = world_created[:world]
     @unit_spawn_areas = world_created[:unit_spawn_areas]
+    @npcs = world_created[:npcs]
     start_units
     @height = @world.size
     @width = @world[0].size
@@ -16,8 +17,10 @@ class World
     @events = []
   end
 
-  def add_character(character)
-    char_cell = get_cell(123, 125)
+  def add_character(character, char_cell = nil)
+    if char_cell.nil?
+      char_cell = get_cell(123, 125)
+    end
     character.cell = char_cell
   end
 
