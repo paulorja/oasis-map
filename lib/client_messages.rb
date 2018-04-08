@@ -22,16 +22,16 @@ class ClientMessages
     JsonMsg.success({message: 'add_character', character: character.client_data })
   end
 
-  def self.remove_character(character)
-    JsonMsg.success({message: 'remove_character', nickname: character.nickname })
+  def self.remove_character(character_id)
+    JsonMsg.success({message: 'remove_character', character_id: character_id })
   end
 
   def self.refresh_character(character)
     JsonMsg.success({message: 'refresh_character', character: character.client_data })
   end
 
-  def self.auth_success(nickname)
-  	JsonMsg.success({message: 'auth_success', nickname: nickname})
+  def self.auth_success(character_id)
+  	JsonMsg.success({message: 'auth_success', character_id: character_id})
   end
 
   def self.inventory(inventory)
@@ -86,7 +86,7 @@ class ClientMessages
   def self.character_animation(config)
     JsonMsg.success({
       message: 'character_animation',
-      nickname: config[:nickname], 
+      character_id: config[:character_id], 
       animation: config[:animation]
     })
   end

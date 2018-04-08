@@ -5,7 +5,7 @@ class Authentication
     if player.is_valid?
       players[ws.object_id] = player
       server.subscribe_channel('all', ws)
-      server.send ClientMessages.auth_success(player.character.nickname), ws
+      server.send ClientMessages.auth_success(player.character.object_id), ws
 
       player.character.inventory.add world.items[1]
       player.character.inventory.add world.items[3]
