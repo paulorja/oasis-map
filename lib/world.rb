@@ -19,7 +19,7 @@ class World
 
   def add_character(character, char_cell = nil)
     if char_cell.nil?
-      char_cell = get_cell(123, 125)
+      char_cell = get_cell(125+rand(2), 125+rand(2))
     end
     character.cell = char_cell
   end

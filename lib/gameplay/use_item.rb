@@ -7,7 +7,6 @@ module Gameplay
       if item
         # equip
         if player.character.equip(item)
-          player.character.inventory.remove item
           server.send ClientMessages.inventory(player.character.inventory), ws
           server.channel_push('all', ClientMessages.refresh_character(player.character))
         end

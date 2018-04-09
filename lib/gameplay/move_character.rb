@@ -5,7 +5,7 @@ module Gameplay
 
     def run
 
-      cell_to = world.get_cell(params['to_x'], params['to_y'])
+      cell_to = world.get_cell(params['x'], params['y'])
       cell_from = player.character.cell
 
       #if char is locked
@@ -26,7 +26,7 @@ module Gameplay
         end
       end
 
-      return false if cell_from.distance_to(cell_to) > LIMIT_MOVE
+      return false if cell_to and cell_from.distance_to(cell_to) > LIMIT_MOVE
       return false unless player.character.is_delay_ok
 
       if cell_from and cell_to and !cell_to.is_solid?

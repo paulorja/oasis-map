@@ -160,15 +160,19 @@ class Character
       when 'right_hand'
         inventory.add @right_hand unless @right_hand.nil?
         @right_hand = item
+        inventory.remove item
       when 'head'
         inventory.add @head unless @head.nil?
         @head = item
+        inventory.remove item
       when 'body'
         inventory.add @body unless @body.nil?
         @body = item
+        inventory.remove item
       when 'face'
         inventory.add @face unless @face.nil?
         @face = item
+        inventory.remove item
       else
         false
       end

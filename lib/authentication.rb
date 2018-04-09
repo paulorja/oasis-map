@@ -7,8 +7,11 @@ class Authentication
       server.subscribe_channel('all', ws)
       server.send ClientMessages.auth_success(player.character.object_id), ws
 
-      player.character.inventory.add world.items[1]
+      #player.character.inventory.add world.items[1]
       player.character.inventory.add world.items[3]
+      pick = player.character.inventory.find_item 3
+      player.character.equip(pick)
+
       player.character.inventory.add world.items[7]
       player.character.inventory.add world.items[8]
       player.character.inventory.add world.items[9]
@@ -29,8 +32,8 @@ class Authentication
         ClientMessages.global_chat(
           {nickname: 'Server', chat_message: "#{player.character.nickname} entrou."}))
 
-      world.get_cell(124, 124).set_unit 0
-      world.get_cell(127, 124).set_unit 0
+      world.get_cell(124, 124).set_unit 3
+      world.get_cell(127, 124).set_unit 3
       world.get_cell(124, 127).set_unit 3
       world.get_cell(127, 127).set_unit 3
       server.channel_push('all', ClientMessages.refresh_cell(world.get_cell(124, 124)))

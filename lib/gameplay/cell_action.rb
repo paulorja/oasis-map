@@ -14,6 +14,23 @@ module Gameplay
             cell.set_unit(nil)
             world.refresh_pathfinding
             player.character.end_delay_at = Time.now.to_f + 0.5
+
+            # ATTACK ANIMATION
+            direction = 'top'
+            direction = 'right'  if cell.x > char.cell.x
+            direction = 'left'   if cell.x < char.cell.x
+            direction = 'bottom' if cell.y > char.cell.y
+            attack_animation = {
+              type: 'attack',
+              duration: 0.5,
+              direction: direction
+            }
+            server.channel_push('all', ClientMessages.character_animation({
+              character_id: char.object_id,
+              animation: attack_animation
+            }))
+            #
+
             server.channel_push('all', ClientMessages.refresh_cell(cell))
             server.send ClientMessages.inventory(player.character.inventory), ws
           end
