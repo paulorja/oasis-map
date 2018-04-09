@@ -9,8 +9,8 @@ module Gameplay
         pos2 = @player.character.current_pos
         distance = @world.distance_of(pos1[0], pos1[1], pos2[0], pos2[1])
 
-        if distance.to_f <= 1.to_f and char.nickname != player.character.nickname
-          # attack
+        # ATTACK 
+        if distance.to_f <= 1.to_f and char.object_id != player.character.object_id
           total_damage = player.character.calc_atk + rand(5) -2
           total_damage = 1 if total_damage < 1
 
@@ -38,7 +38,7 @@ module Gameplay
             value: total_damage
           }
           server.channel_push('all', ClientMessages.character_animation({
-            nickname: char.nickname,
+            character_id: char.object_id,
             animation: damage_animation 
           }))
 
@@ -54,10 +54,9 @@ module Gameplay
             direction: direction
           }
           server.channel_push('all', ClientMessages.character_animation({
-            nickname: player.character.nickname,
+            character_id: player.character.object_id,
             animation: attack_animation
           }))
-
 
           #
           server.channel_push('all', ClientMessages.refresh_character(char))
