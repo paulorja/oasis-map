@@ -12,6 +12,7 @@ require './lib/world'
 require './lib/cell'
 require './lib/player'
 require './lib/character'
+require './lib/character_ai'
 require './lib/npc'
 require './lib/gameplay/gameplay_cmd'
 require './lib/gameplay/move_character'
@@ -46,7 +47,7 @@ class Server
   end
 
   def start
-  	@world = World.new
+  	@world = World.new(self)
   	@players = {}
     @world.npcs.each do |npc|
       @players[npc.object_id] = npc
@@ -85,7 +86,7 @@ class Server
             if @players[ws.object_id].nil?
               puts 'you cant do this'
             else
-              @world.gameplay json_msg, @players[ws.object_id], self, ws
+              @world.gameplay json_msg, @players[ws.object_id], @world, ws
             end
           else
             puts 'not found'

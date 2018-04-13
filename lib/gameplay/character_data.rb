@@ -2,7 +2,7 @@ module Gameplay
   class CharacterData < GameplayCmd
 
     def run
-      server.send ClientMessages.character_data(player.character.client_data), ws
+      world.server.send ClientMessages.character_data(player.character.client_data), ws
     end
 
   end

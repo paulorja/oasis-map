@@ -25,14 +25,14 @@ module Gameplay
               duration: 0.5,
               direction: direction
             }
-            server.channel_push('all', ClientMessages.character_animation({
+            world.server.channel_push('all', ClientMessages.character_animation({
               character_id: char.object_id,
               animation: attack_animation
             }))
             #
 
-            server.channel_push('all', ClientMessages.refresh_cell(cell))
-            server.send ClientMessages.inventory(player.character.inventory), ws
+            world.server.channel_push('all', ClientMessages.refresh_cell(cell))
+            world.server.send ClientMessages.inventory(player.character.inventory), ws
           end
         end
       end

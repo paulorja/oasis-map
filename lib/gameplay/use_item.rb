@@ -7,8 +7,8 @@ module Gameplay
       if item
         # equip
         if player.character.equip(item)
-          server.send ClientMessages.inventory(player.character.inventory), ws
-          server.channel_push('all', ClientMessages.refresh_character(player.character))
+          world.server.send ClientMessages.inventory(player.character.inventory), ws
+          world.server.channel_push('all', ClientMessages.refresh_character(player.character))
         end
 
         # seed
@@ -18,8 +18,8 @@ module Gameplay
             player.character.cell.set_unit(item['private']['seed']['seed_unit_tsx_id'])
             player.character.inventory.remove_by_id item['public']['id']
             world.add_event GameEvents::EventSeed.new(item['private']['seed']['time'], player.character.cell, world)
-            server.send ClientMessages.inventory(player.character.inventory), ws
-            server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
+            world.server.send ClientMessages.inventory(player.character.inventory), ws
+            world.server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
           end
         end
 
@@ -30,8 +30,8 @@ module Gameplay
             player.character.cell.set_unit(item['private']['build']['unit_tsx_id'])
             player.character.inventory.remove_by_id item['public']['id']
             world.refresh_pathfinding
-            server.send ClientMessages.inventory(player.character.inventory), ws
-            server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
+            world.server.send ClientMessages.inventory(player.character.inventory), ws
+            world.server.channel_push('all', ClientMessages.refresh_cell(player.character.cell))
           end
         end
 
@@ -46,13 +46,13 @@ module Gameplay
           player.character.inventory.remove_by_id item['public']['id']
 
           #server
-          server.send ClientMessages.inventory(player.character.inventory), ws
-          server.send ClientMessages.character_data(player.character.client_data), ws
+          world.server.send ClientMessages.inventory(player.character.inventory), ws
+          world.server.send ClientMessages.character_data(player.character.client_data), ws
         end
 
         #character animation
         if item['private']['character_animation']
-          server.send ClientMessages.character_animation({nickname: player.character.nickname, animation: item['private']['character_animation']}), ws
+          world.server.send ClientMessages.character_animation({nickname: player.character.nickname, animation: item['private']['character_animation']}), ws
         end 
       end
     end
@@ -61,7 +61,7 @@ module Gameplay
 
     def stop_character
       if player.character.is_moving
-        Gameplay::MoveCharacter.new(type, { 'to_x' => player.character.current_pos[0], 'to_y' => player.character.current_pos[1]}, server, player, world, ws).run
+        Gameplay::MoveCharacter.new(type, { 'to_x' => player.character.current_pos[0], 'to_y' => player.character.current_pos[1]}, player, world, ws).run
       end
     end
 

@@ -1,12 +1,11 @@
 module Gameplay
   class GameplayCmd
 
-    attr_accessor :type, :params, :server, :player, :world, :ws
+    attr_accessor :type, :params, :player, :world, :ws
 
-    def initialize(type, params, server, player, world, ws)
+    def initialize(type, params, player, world, ws = nil)
       @type = type
       @params = params
-      @server = server
       @player = player
       @world = world
       @ws = ws

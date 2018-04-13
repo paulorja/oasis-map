@@ -10,9 +10,9 @@ module Gameplay
       if craft_item
         if player.character.craft(craft_item, world.items)
           player.character.add_craft_exp craft_item['exp']
-          server.send ClientMessages.craft_info(player.character.craft_info), ws
-          server.send ClientMessages.refresh_craft_list(player.character.craft_list), ws
-          server.send ClientMessages.inventory(player.character.inventory), ws
+          world.server.send ClientMessages.craft_info(player.character.craft_info), ws
+          world.server.send ClientMessages.refresh_craft_list(player.character.craft_list), ws
+          world.server.send ClientMessages.inventory(player.character.inventory), ws
         end
       end
     end

@@ -38,7 +38,7 @@ module Gameplay
         if pathfinding and pathfinding.size < 20
           player.character.set_pathfinding pathfinding
           player.character.cell = cell_to
-          server.channel_push('all', ClientMessages.refresh_character(player.character))
+          world.server.channel_push('all', ClientMessages.refresh_character(player.character))
         end
       end
     end

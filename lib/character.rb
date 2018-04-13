@@ -1,11 +1,12 @@
 class Character
 
-  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp, :attribute_balance, :end_delay_at
+  attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp, :attribute_balance, :end_delay_at, :world
 
   def initialize(nickname, body_style, ws_id = nil)
-    @ws_id = ws_id
     @nickname = nickname
+    @ws_id = ws_id
     @cell = nil
+    @world = nil 
     @start_move_at = Time.now.to_f
     @end_move_at = Time.now.to_f
     @end_delay_at = Time.now.to_f

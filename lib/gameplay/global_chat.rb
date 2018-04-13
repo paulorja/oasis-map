@@ -3,7 +3,7 @@ module Gameplay
 
     def run
       if params['chat_message'].is_a? String
-        server.channel_push('all', ClientMessages.global_chat({
+        world.server.channel_push('all', ClientMessages.global_chat({
           nickname: player.character.nickname,
           chat_message: params['chat_message']
         }))

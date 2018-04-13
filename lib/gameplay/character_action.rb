@@ -28,16 +28,16 @@ module Gameplay
 
           if char.ws_id
             char_ws = ObjectSpace._id2ref(char.ws_id)
-            server.send(ClientMessages.character_data(char.client_data), char_ws)
+            world.server.send(ClientMessages.character_data(char.client_data), char_ws)
           end
-          server.send ClientMessages.character_data(player.character.client_data), ws
+          world.server.send ClientMessages.character_data(player.character.client_data), ws
           
           # DAMAGE ANIMATION
           damage_animation = {
             type: 'damage',
             value: total_damage
           }
-          server.channel_push('all', ClientMessages.character_animation({
+          world.server.channel_push('all', ClientMessages.character_animation({
             character_id: char.object_id,
             animation: damage_animation 
           }))
@@ -53,13 +53,13 @@ module Gameplay
             duration: 0.5,
             direction: direction
           }
-          server.channel_push('all', ClientMessages.character_animation({
+          world.server.channel_push('all', ClientMessages.character_animation({
             character_id: player.character.object_id,
             animation: attack_animation
           }))
 
           #
-          server.channel_push('all', ClientMessages.refresh_character(char))
+          world.server.channel_push('all', ClientMessages.refresh_character(char))
         end
       end
     end

@@ -1,8 +1,10 @@
 class World
 
+  attr_accessor :server
   attr_reader :width, :height, :items, :terrains, :units, :pathfinding, :events, :unit_spawn_areas, :npcs
 
-  def initialize
+  def initialize(server)
+    @server = server
     world_created = WorldCreator.create
     @world = world_created[:world]
     @unit_spawn_areas = world_created[:unit_spawn_areas]
@@ -22,32 +24,34 @@ class World
       char_cell = get_cell(125+rand(2), 125+rand(2))
     end
     character.cell = char_cell
+    character.world = self
   end
 
   def gameplay(json_msg, player, server, ws)
+    Log.log("WS: #{ws}")
     case json_msg['gameplay_name']
     when 'move'
-      Gameplay::MoveCharacter.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::MoveCharacter.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'cell_action'
-      Gameplay::CellAction.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::CellAction.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'take_cell_drops'
-      Gameplay::TakeCellDrops.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::TakeCellDrops.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'global_chat'
-      Gameplay::GlobalChat.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::GlobalChat.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'use_item'
-      Gameplay::UseItem.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::UseItem.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'remove_equip'
-      Gameplay::RemoveEquip.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::RemoveEquip.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'craft'
-      Gameplay::Craft.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::Craft.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'request_craft'
-      Gameplay::RequestCraft.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::RequestCraft.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'character_data'
-      Gameplay::CharacterData.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::CharacterData.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'char_action'
-      Gameplay::CharacterAction.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::CharacterAction.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     when 'increment_char_attr'
-      Gameplay::IncrementCharAttr.new(json_msg['gameplay_name'], json_msg['params'], server, player, self, ws).run
+      Gameplay::IncrementCharAttr.new(json_msg['gameplay_name'], json_msg['params'], player, self, ws).run
     else
       raise 'comand not exist'
     end

@@ -11,8 +11,8 @@ module Gameplay
         char.cell.send_drops_to_char(char)
 
         if refresh_cell_and_inventory
-          server.channel_push('all', ClientMessages.refresh_cell(char.cell))
-          server.send ClientMessages.inventory(player.character.inventory), ws
+          world.server.channel_push('all', ClientMessages.refresh_cell(char.cell))
+          world.server.send ClientMessages.inventory(player.character.inventory), ws
         end
       end
     end
