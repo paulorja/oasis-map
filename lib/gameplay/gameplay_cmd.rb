@@ -3,9 +3,9 @@ module Gameplay
 
     attr_accessor :type, :params, :player, :world, :ws
 
-    def initialize(type, params, player, world, ws = nil)
-      @type = type
-      @params = params
+    def initialize(msg_hash, player, world, ws = nil)
+      @type = msg_hash['gameplay_name']
+      @params = msg_hash['params'] 
       @player = player
       @world = world
       @ws = ws
