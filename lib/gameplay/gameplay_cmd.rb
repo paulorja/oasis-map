@@ -23,5 +23,12 @@ module Gameplay
       @params.is_a? Hash
     end
 
+    def self.generate_msg(name, params)
+      {
+        'gameplay_name' => name,
+        'params' => params
+      }
+    end
+
   end
 end

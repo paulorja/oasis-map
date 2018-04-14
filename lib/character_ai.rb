@@ -13,8 +13,11 @@ class CharacterAI < Character
       loop do
         Log.log("NPC: #{self.nickname}")
         if self.cell
-          params = { 'x' => self.current_pos[0]+1-rand(3), 'y' => self.current_pos[1]+1-rand(3)}
-          Gameplay::MoveCharacter.new('move', params, @npc_player, self.world).run
+          msg = Gameplay::GameplayCmd.generate_msg('move', {
+            'x' => self.current_pos[0]+1-rand(3), 
+            'y' => self.current_pos[1]+1-rand(3)
+          })
+          Gameplay::MoveCharacter.new(msg, @npc_player, self.world).run
         end
         sleep 1
       end
