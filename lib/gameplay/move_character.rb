@@ -7,11 +7,6 @@ module Gameplay
       cell_to = world.get_cell(params['x'], params['y'])
       cell_from = player.character.cell
 
-      Log.log cell_from 
-      Log.log cell_to
-      Log.log world 
-      Log.log world.get_cell(params['x'], params['y'])
-
       #if char is locked
       if cell_from.is_solid?
         top = world.get_cell(cell_from.x, cell_from.y-1)

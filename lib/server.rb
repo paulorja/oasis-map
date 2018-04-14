@@ -73,7 +73,7 @@ class Server
             Log.alert "invalid json: #{msg}".red
           end
 
-          Log.log "Received: #{msg}"
+          Log.log "Received".yellow + ": #{msg}"
 
           case json_msg['message']
           when 'auth'
