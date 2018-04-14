@@ -4,9 +4,13 @@ module Gameplay
     LIMIT_MOVE = 12
 
     def run
-
       cell_to = world.get_cell(params['x'], params['y'])
       cell_from = player.character.cell
+
+      Log.log cell_from 
+      Log.log cell_to
+      Log.log world 
+      Log.log world.get_cell(params['x'], params['y'])
 
       #if char is locked
       if cell_from.is_solid?

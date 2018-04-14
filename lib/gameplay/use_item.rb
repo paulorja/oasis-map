@@ -61,7 +61,7 @@ module Gameplay
 
     def stop_character
       if player.character.is_moving
-        Gameplay::MoveCharacter.new(type, { 'to_x' => player.character.current_pos[0], 'to_y' => player.character.current_pos[1]}, player, world, ws).run
+        Gameplay::MoveCharacter.new(type, { 'x' => player.character.current_pos[0], 'y' => player.character.current_pos[1]}, player, world, ws).run
       end
     end
 
