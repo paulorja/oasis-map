@@ -105,6 +105,13 @@ class Server
             ClientMessages.global_chat(
               {nickname: 'Server', chat_message: "#{character.nickname} saiu."}))
           channel_push('all', ClientMessages.remove_character(character.object_id))
+
+          @players.each do |key, player|
+            if player.character.is_a? CharacterAI and player.character.follow_char == @players[ws.object_id].character
+              player.character.follow_char = nil
+            end
+          end
+
           @players.delete ws.object_id
         end
         Log.log 'Connection Close'

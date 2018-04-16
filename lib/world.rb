@@ -101,5 +101,30 @@ class World
     distance = Math.sqrt(((x2-x1)**2) + ((y2-y1)**2))
     '%.1f' % distance
   end
+
+  def get_shortest_border_cell(char, tgt_char)
+    from = char.current_pos
+    to = tgt_char.current_pos
+    borders = [
+      get_cell(to[0]-1, to[1]), #top
+      get_cell(to[0]+1, to[1]), #bottom
+      get_cell(to[0], to[1]+1), #right
+      get_cell(to[0], to[1]-1) #left
+    ]
+    best_pos = nil 
+    best_path_size = nil
+    borders.each do |border_cell|
+      if border_cell
+        path = pathfinding.find_path(
+          from[0], from[1], border_cell.x, border_cell.y
+        )
+        if path and (best_path_size.nil? or path.size < best_path_size)
+          best_path_size = path.size 
+          best_pos = [border_cell.x, border_cell.y] 
+        end
+      end
+    end
+    return best_pos 
+  end
   
 end
