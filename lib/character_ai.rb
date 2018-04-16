@@ -15,17 +15,29 @@ class CharacterAI < Character
         @sleep = 1
         if @follow_char
           unless is_moving
-            pos_to_move = self.world.get_shortest_border_cell(self, @follow_char)
-            if pos_to_move
-              msg = Gameplay::GameplayCmd.generate_msg('move', {
-                'x' => pos_to_move[0], 
-                'y' => pos_to_move[1]
+            distance = self.world.distance_of(
+              self.current_pos[0], self.current_pos[1],
+              @follow_char.current_pos[0], @follow_char.current_pos[1]
+            )
+            if distance.to_f == 1.0
+              msg = Gameplay::GameplayCmd.generate_msg('character_action', {
+                'char_id' => @follow_char.object_id 
               })
-              Gameplay::MoveCharacter.new(msg, @npc_player, self.world).run
+              Gameplay::CharacterAction.new(msg, @npc_player, self.world).run
+              @sleep = 0.9
             else
-              @follow_char = nil
+              pos_to_move = self.world.get_shortest_border_cell(self, @follow_char)
+              if pos_to_move
+                msg = Gameplay::GameplayCmd.generate_msg('move', {
+                  'x' => pos_to_move[0], 
+                  'y' => pos_to_move[1]
+                })
+                Gameplay::MoveCharacter.new(msg, @npc_player, self.world).run
+              else
+                @follow_char = nil
+              end
+              @sleep = 0.1
             end
-            @sleep = 0.1
           end
         elsif self.cell
           Log.log("NPC: #{self.nickname}")
@@ -34,8 +46,9 @@ class CharacterAI < Character
             'y' => self.current_pos[1]+1-rand(3)
           })
           Gameplay::MoveCharacter.new(msg, @npc_player, self.world).run
+          @sleep += rand
         end
-        sleep @sleep + rand
+        sleep @sleep 
       end
     end
   end

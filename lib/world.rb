@@ -105,12 +105,8 @@ class World
   def get_shortest_border_cell(char, tgt_char)
     from = char.current_pos
     to = tgt_char.current_pos
-    borders = [
-      get_cell(to[0]-1, to[1]), #top
-      get_cell(to[0]+1, to[1]), #bottom
-      get_cell(to[0], to[1]+1), #right
-      get_cell(to[0], to[1]-1) #left
-    ]
+    borders = get_borders(to[0], to[1])
+
     best_pos = nil 
     best_path_size = nil
     borders.each do |border_cell|
@@ -125,6 +121,17 @@ class World
       end
     end
     return best_pos 
+  end
+
+  private
+
+  def get_borders(x, y)
+    return [
+      get_cell(x-1, y), #top
+      get_cell(x+1, y), #bottom
+      get_cell(x, y+1), #right
+      get_cell(x, y-1) #left
+    ]
   end
   
 end
