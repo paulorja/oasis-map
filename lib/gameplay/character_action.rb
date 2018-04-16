@@ -33,7 +33,10 @@ module Gameplay
             char_ws = ObjectSpace._id2ref(target_char.ws_id)
             world.server.send(ClientMessages.character_data(target_char.client_data), char_ws)
           end
-          world.server.send ClientMessages.character_data(player.character.client_data), ws
+
+          if player.character.ws_id
+            world.server.send ClientMessages.character_data(player.character.client_data), ws
+          end
           
           # DAMAGE ANIMATION
           damage_animation = {
