@@ -1,0 +1,9 @@
+{
+  "id": 2,
+  "body_style": "2",
+  "name": "Comprador de Pedras",
+  "message": "Compro pedras! Compro pedras!!",
+  "buy_list": [
+    {"id": 18, "price": 1}
+  ]
+}

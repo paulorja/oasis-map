@@ -5,6 +5,7 @@ require 'chingu_pathfinding'
 require 'set'
 require 'byebug'
 
+require './configs/configs_loader'
 require './lib/json_msg'
 require './lib/client_messages'
 require './lib/log'
@@ -29,17 +30,17 @@ require './lib/gameplay/request_craft'
 require './lib/gameevent/gameevent'
 require './lib/gameevent/event_seed'
 require './lib/gameevent/spawn_unit'
-require './lib/game_object_loader'
 require './lib/world_loader'
 require './lib/world_creator'
 require './lib/pathfinding_generator'
 require './lib/authentication'
 require './lib/inventory'
 
-TERRAINS = GameObjectLoader.load_terrains
-UNITS = GameObjectLoader.load_units
-UNIT_SPAWNS = GameObjectLoader.load_unit_spawns
-NPCS = GameObjectLoader.load_npcs
+Thread.current["name"] = "server"
+TERRAINS = ConfigsLoader.load_terrains
+UNITS = ConfigsLoader.load_units
+UNIT_SPAWNS = ConfigsLoader.load_unit_spawns
+NPCS = ConfigsLoader.load_npcs
 
 class Server
 
@@ -73,7 +74,7 @@ class Server
             Log.alert "invalid json: #{msg}".red
           end
 
-          Log.log "Received".yellow + ": #{msg}"
+          Log.info "[received]" + ": #{msg}"
 
           case json_msg['message']
           when 'auth'
@@ -89,11 +90,10 @@ class Server
               @world.gameplay json_msg, @players[ws.object_id], @world, ws
             end
           else
-            puts 'not found'
+            Log.info "gameplay not found: #{msg}"
           end
         rescue => exception
-          puts exception.backtrace
-          raise
+          Log.alert exception.backtrace
         end
 	  }
     

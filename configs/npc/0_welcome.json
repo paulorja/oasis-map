@@ -1,9 +1,11 @@
 {
   "id": 0,
+  "body_style": "3",
   "name": "Joao",
   "ballons_list": [
     {
       "content": "Bem vindo ao melhor jogo já criado!"
     }
-  ]
+  ],
+  "move": true
 }

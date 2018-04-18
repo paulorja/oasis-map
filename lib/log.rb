@@ -5,7 +5,7 @@ class Log
 	end
 
   def self.info(msg)
-		puts "[INFO]#{time_now}| #{msg}"
+    puts_log "INFO", msg
   end
 
 	def self.alert(msg)
@@ -17,19 +17,23 @@ class Log
 	end
 
 	def self.error(msg)
-		puts "[ERROR]#{time_now}| #{msg}"
+    puts_log "ERROR", msg
 	end
 
 	def self.send(msg)
-		puts "#{'[SEND]'.green}#{time_now}| #{msg} "
+		#puts "#{'[SEND]'.green}#{time_now}| #{msg} "
 	end
 
 	def self.push(msg)
-		puts "#{'[PUSH]'.green}#{time_now}| #{msg} "
+		#puts "#{'[PUSH]'.green}#{time_now}| #{msg} "
 	end
 
 	def self.time_now
 		"[#{Time.now.strftime('%T')} #{Time.now.usec}]"
 	end
+
+  def self.puts_log(type, msg)
+    puts "[#{Thread.current["name"]}][#{type}]#{time_now}| #{msg}"
+  end
 
 end

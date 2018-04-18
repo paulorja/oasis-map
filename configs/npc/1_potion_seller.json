@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "body_style": "1",
+  "name": "Vendedor de Poções",
+  "message": "Olá, gostaria de comprar algumas poções?",
+  "sell_list": [
+    {"id": 26, "price": 21},
+    {"id": 27, "price": 6}
+  ]
+}

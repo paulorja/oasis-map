@@ -232,7 +232,7 @@ class Character
     @craft_list = []
     i = 1
     craft_level.times do
-      @craft_list += GameObjectLoader.load_craft i
+      @craft_list += ConfigsLoader.load_craft i
       i += 1
     end
   end

@@ -71,9 +71,10 @@ class WorldCreator
           if cell > 0
             id_npc = cell - @world_json['tilesets'][3]['firstgid']
             if NPCS[id_npc]
-              npc = Npc.new(NPCS[id_npc]["name"], "1") 
+              npc = Npc.new(NPCS[id_npc]["name"], NPCS[id_npc]["body_style"]) 
               npc.start_x = x
               npc.start_y = y
+              npc.config = NPCS[id_npc]
               npcs << npc
             else
               raise "npc with id #{id_npc} not exist"

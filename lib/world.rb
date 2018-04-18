@@ -4,19 +4,42 @@ class World
   attr_reader :width, :height, :items, :terrains, :units, :pathfinding, :events, :unit_spawn_areas, :npcs
 
   def initialize(server)
+    create_world
+    start_units
     @server = server
+    @height = @world.size
+    @width = @world[0].size
+    @items = ConfigsLoader.load_items
+    @terrains = ConfigsLoader.load_terrains
+    @units = ConfigsLoader.load_units
+    @pathfinding = PathfindingGenerator.new(@world, @height, @width)
+    @events = []
+  end
+
+  def create_world
     world_created = WorldCreator.create
     @world = world_created[:world]
     @unit_spawn_areas = world_created[:unit_spawn_areas]
     @npcs = world_created[:npcs]
-    start_units
-    @height = @world.size
-    @width = @world[0].size
-    @items = GameObjectLoader.load_items
-    @terrains = GameObjectLoader.load_terrains
-    @units = GameObjectLoader.load_units
-    @pathfinding = PathfindingGenerator.new(@world, @height, @width)
-    @events = []
+  end
+
+  def start_units
+    unit_spawn_areas.each_with_index do |area, index|
+      spawn = UNIT_SPAWNS[area[:id]]
+      spawn['amount'].times do
+        finished = false
+        while !finished do
+          rand_x = rand(spawn['range']^2)
+          rand_y = rand(spawn['range']^2)
+
+          cell = @world[area[:x]-spawn['range'] + rand_x][area[:y]-spawn['range'] + rand_y]
+          if cell.unit_id.nil?
+            cell.set_unit(spawn['unit_id'], index)
+            finished = true
+          end
+        end
+      end
+    end
   end
 
   def add_character(character, char_cell = nil)
@@ -75,25 +98,6 @@ class World
   def add_event(event)
     if event.is_a? GameEvents::GameEvent
       @events << event
-    end
-  end
-
-  def start_units
-    unit_spawn_areas.each_with_index do |area, index|
-      spawn = UNIT_SPAWNS[area[:id]]
-      spawn['amount'].times do
-        finished = false
-        while !finished do
-          rand_x = rand(spawn['range']^2)
-          rand_y = rand(spawn['range']^2)
-
-          cell = @world[area[:x]-spawn['range'] + rand_x][area[:y]-spawn['range'] + rand_y]
-          if cell.unit_id.nil?
-            cell.set_unit(spawn['unit_id'], index)
-            finished = true
-          end
-        end
-      end
     end
   end
 

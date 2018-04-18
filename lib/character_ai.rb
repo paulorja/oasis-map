@@ -12,6 +12,7 @@ class CharacterAI < Character
   def start_ai_thread
     Thread.new do 
       loop do
+        Thread.current["name"] = "npc"
         @sleep = 1
         if @follow_char
           unless is_moving
@@ -40,13 +41,14 @@ class CharacterAI < Character
             end
           end
         elsif self.cell
-          Log.log("NPC: #{self.nickname}")
-          msg = Gameplay::GameplayCmd.generate_msg('move', {
-            'x' => self.current_pos[0]+1-rand(3), 
-            'y' => self.current_pos[1]+1-rand(3)
-          })
-          Gameplay::MoveCharacter.new(msg, @npc_player, self.world).run
-          @sleep += rand
+          if @npc_player.config["move"]
+            msg = Gameplay::GameplayCmd.generate_msg('move', {
+              'x' => self.current_pos[0]+1-rand(3), 
+              'y' => self.current_pos[1]+1-rand(3)
+            })
+            Gameplay::MoveCharacter.new(msg, @npc_player, self.world).run
+            @sleep += rand
+          end
         end
         sleep @sleep 
       end

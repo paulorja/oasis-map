@@ -1,4 +1,4 @@
-class GameObjectLoader
+class ConfigsLoader 
 
   def self.load_terrains
     tsx_loader 'terrain'
@@ -13,12 +13,12 @@ class GameObjectLoader
   end
 
   def self.load_craft(level)
-    JSON.parse(File.read("./game_objects/crafting/crafting_level_#{level}.json"))
+    JSON.parse(File.read("./configs/crafting/crafting_level_#{level}.json"))
   end
 
   def self.load_unit_spawns
     unit_spawns = {}
-    Dir.glob("./game_objects/spawn_unit/*.json") do |spawn_file|
+    Dir.glob("./configs/spawn_unit/*.json") do |spawn_file|
       spawn_json = JSON.parse(File.read(spawn_file))
       if unit_spawns[spawn_json['id']].nil?
         unit_spawns[spawn_json['id']] = spawn_json
@@ -31,7 +31,7 @@ class GameObjectLoader
 
   def self.load_items
     items = {}
-    Dir.glob("./game_objects/item/*.json") do |item_file|
+    Dir.glob("./configs/item/*.json") do |item_file|
       item_json = JSON.parse(File.read(item_file))
       if items[item_json['public']['id']].nil?
         items[item_json['public']['id']] = item_json
@@ -44,7 +44,7 @@ class GameObjectLoader
 
   def self.tsx_loader(dir)
     objects = {}
-    Dir.glob("./game_objects/#{dir}/*.json") do |objects_file|
+    Dir.glob("./configs/#{dir}/*.json") do |objects_file|
       objects_json = JSON.parse(File.read(objects_file))
       if objects_json['id'].nil?
         raise "Can not found id from file => #{objects_file} json =: #{objects_json.inspect}"
