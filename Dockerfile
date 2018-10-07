@@ -8,5 +8,3 @@ COPY . /oasis-server
 RUN bundle install
 
 EXPOSE 5000
-
-CMD ["ruby", "run.rb"]

@@ -1,4 +1,9 @@
-### Run server
-* cd oasis-server
-* docker build -t oasis-server
-* docker run -t -p 5000:5000 oasis-server
+### Dependencies
+* docker
+* docker-compose
+
+### Run 
+* make run 
+
+### Run Tests
+* make tests
