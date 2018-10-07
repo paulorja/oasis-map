@@ -1,8 +1,9 @@
 version: '3'
 services:
-  web:
+  oasis-map:
     build: .
+    command: ruby run.rb
     volumes:
-      - .:/oasis-server
+      - .:/oasis-map
     ports:
       - "5000:5000"
