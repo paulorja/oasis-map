@@ -40,7 +40,7 @@ TERRAINS = ConfigsLoader.load_terrains
 UNITS = ConfigsLoader.load_units
 UNIT_SPAWNS = ConfigsLoader.load_unit_spawns
 NPCS = ConfigsLoader.load_npcs
-WORLD_NAME = "dev_work_items"
+WORLD_NAME = "default_world"
 
 class Server
 

@@ -10,7 +10,7 @@ class CharacterAI < Character
   end
 
   def start_ai_thread
-    Thread.new do 
+    Thread.new do
       loop do
         Thread.current["name"] = "npc"
         @sleep = 1

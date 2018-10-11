@@ -18,13 +18,14 @@ module Gameplay
           if target_char.is_a? CharacterAI and target_char.follow_char.nil?
             target_char.follow_char = player.character
           end
-          
+
           player.character.end_delay_at = Time.now.to_f + 0.5
 
           # kill
-          if target_char.hp < 0 
+          if target_char.hp < 0
             target_char.cell = @world.get_cell(123, 125)
             target_char.hp = target_char.calc_max_hp
+            target_char.follow_char = nil
             # add 1 attribute to killer
             player.character.attribute_balance += 1
           end
