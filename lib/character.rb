@@ -1,3 +1,4 @@
+# coding: utf-8
 class Character
 
   attr_accessor :ws_id, :nickname, :cell, :inventory, :right_hand, :body, :head, :face, :cooldown, :craft_list, :craft_exp, :craft_level, :str, :agi, :int, :luk, :hp, :max_hp, :attribute_balance, :end_delay_at, :world
@@ -6,7 +7,7 @@ class Character
     @nickname = nickname
     @ws_id = ws_id
     @cell = nil
-    @world = nil 
+    @world = nil
     @start_move_at = Time.now.to_f
     @end_move_at = Time.now.to_f
     @end_delay_at = Time.now.to_f
@@ -63,7 +64,7 @@ class Character
       agi: @agi,
       int: @int,
       luk: @luk,
-      attribute_balance: @attribute_balance, 
+      attribute_balance: @attribute_balance,
       hp: @hp,
       max_hp: calc_max_hp
   	}
@@ -154,7 +155,7 @@ class Character
     @hp += amount.to_i
     @hp = max_hp if @hp > max_hp
   end
-  
+
   def equip(item)
     if item['public']['equip_on']
       case item['public']['equip_on']
@@ -270,10 +271,10 @@ class Character
   end
 
   def equips_ar
-    [@body, @head, @right_hand, @face] 
+    [@body, @head, @right_hand, @face]
   end
 
-  private 
+  private
 
   def sum_equip_attr(attr)
     sum = 0

@@ -17,7 +17,7 @@ class World
   end
 
   def create_world
-    world_created = WorldCreator.create
+    world_created = WorldLoader.create()
     @world = world_created[:world]
     @unit_spawn_areas = world_created[:unit_spawn_areas]
     @npcs = world_created[:npcs]
@@ -45,7 +45,11 @@ class World
   def add_character(character, char_cell = nil)
     if char_cell.nil?
       char_cell = get_cell(125+rand(2), 125+rand(2))
-      char_cell = get_cell(18, 10) unless char_cell
+      if WORLD_NAME == "dev_work_items"
+        char_cell = get_cell(18, 10)
+      elsif WORLD_NAME == "dev_mini"
+        char_cell = get_cell(1, 1)
+      end
     end
     character.cell = char_cell
     character.world = self

@@ -31,7 +31,6 @@ require './lib/gameevent/gameevent'
 require './lib/gameevent/event_seed'
 require './lib/gameevent/spawn_unit'
 require './lib/world_loader'
-require './lib/world_creator'
 require './lib/pathfinding_generator'
 require './lib/authentication'
 require './lib/inventory'
@@ -41,6 +40,7 @@ TERRAINS = ConfigsLoader.load_terrains
 UNITS = ConfigsLoader.load_units
 UNIT_SPAWNS = ConfigsLoader.load_unit_spawns
 NPCS = ConfigsLoader.load_npcs
+WORLD_NAME = "dev_work_items"
 
 class Server
 
@@ -52,7 +52,7 @@ class Server
   	@players = {}
     @world.npcs.each do |npc|
       @players[npc.object_id] = npc
-      @world.add_character(npc.character, @world.get_cell(npc.start_x, npc.start_y)) 
+      @world.add_character(npc.character, @world.get_cell(npc.start_x, npc.start_y))
     end
     create_channel('all')
     start_resolve_events
